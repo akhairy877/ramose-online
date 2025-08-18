@@ -104,3 +104,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .border-rainbow {
+    background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7, #fd79a8, #fdcb6e);
+  }
+
+  .grid-cols-37 {
+    grid-template-columns: auto repeat(36, minmax(80px, 1fr));
+  }
+}
