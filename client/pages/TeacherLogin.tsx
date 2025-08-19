@@ -36,23 +36,23 @@ export default function TeacherLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 flex items-center justify-center p-2 sm:p-4">
+      <div className="w-full max-w-sm sm:max-w-md">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
+        <div className="text-center mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
             🏫 Teacher Portal
           </h1>
-          <p className="text-gray-600">Access your student management dashboard</p>
+          <p className="text-gray-600 text-sm sm:text-base">Access your student management dashboard</p>
         </div>
 
         {/* Login Form */}
         <Card className="bg-white/80 backdrop-blur-sm border-2 border-purple-200 shadow-xl">
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl text-gray-800">Welcome Back!</CardTitle>
-            <p className="text-gray-600 text-sm">Sign in to manage your students' progress</p>
+          <CardHeader className="text-center p-4 sm:p-6">
+            <CardTitle className="text-xl sm:text-2xl text-gray-800">Welcome Back!</CardTitle>
+            <p className="text-gray-600 text-xs sm:text-sm">Sign in to manage your students' progress</p>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-4 sm:p-6">
             <form onSubmit={handleLogin} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="username" className="text-gray-700 font-medium">Username</Label>
