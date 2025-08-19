@@ -242,8 +242,8 @@ export default function Index() {
                         ) : (
                           <div className="flex items-center justify-center h-full text-gray-400">
                             <div className="text-center">
-                              <span className="text-2xl block mb-1">⏳</span>
-                              <span className="text-xs">Not Started</span>
+                              <span className="text-lg sm:text-xl lg:text-2xl block mb-1">⏳</span>
+                              <span className="text-xs hidden sm:block">Not Started</span>
                             </div>
                           </div>
                         )}
