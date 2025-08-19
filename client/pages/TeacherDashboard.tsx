@@ -156,6 +156,13 @@ export default function TeacherDashboard() {
 
       {/* Main Dashboard */}
       <div className="container mx-auto px-4 py-6">
+        {/* Feedback Message */}
+        {feedbackMessage && (
+          <Alert className="mb-6 border-green-200 bg-green-50">
+            <AlertDescription className="text-green-700">{feedbackMessage}</AlertDescription>
+          </Alert>
+        )}
+
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Student Selection */}
           <Card>
