@@ -196,10 +196,66 @@ const generateStudents = (): Student[] => {
   return students;
 };
 
-export const visionBoardData: VisionBoardData = {
+// Create a global data store that can be updated
+let globalVisionBoardData: VisionBoardData = {
   students: generateStudents(),
   subjects,
   teachers,
   currentWeek: 12,
   totalWeeks: 36
+};
+
+export const visionBoardData: VisionBoardData = globalVisionBoardData;
+
+// Function to update milestone status
+export const updateMilestoneStatus = (studentId: string, milestoneId: string, newStatus: Milestone['status']): boolean => {
+  const student = globalVisionBoardData.students.find(s => s.id === studentId);
+  if (!student) return false;
+
+  const milestone = student.milestones.find(m => m.id === milestoneId);
+  if (!milestone) return false;
+
+  milestone.status = newStatus;
+
+  // Recalculate points based on new status
+  if (newStatus === 'passed' && milestone.quizAttempts.length === 0) {
+    // If marking as passed but no attempts exist, create a passing attempt
+    milestone.quizAttempts = [{
+      attempt: 1,
+      grade: 85,
+      passed: true,
+      date: new Date().toISOString()
+    }];
+  } else if (newStatus === 'failed-permanent' && milestone.quizAttempts.length < 3) {
+    // If marking as permanently failed, ensure 3 attempts exist
+    while (milestone.quizAttempts.length < 3) {
+      milestone.quizAttempts.push({
+        attempt: milestone.quizAttempts.length + 1,
+        grade: Math.floor(Math.random() * 60),
+        passed: false,
+        date: new Date().toISOString()
+      });
+    }
+  }
+
+  milestone.points = calculatePoints(milestone.quizAttempts);
+
+  // Recalculate student's total points
+  student.totalPoints = student.milestones.reduce((sum, m) => sum + m.points, 0);
+
+  return true;
+};
+
+// Function to update student career goal
+export const updateStudentCareerGoal = (studentId: string, newGoal: string): boolean => {
+  const student = globalVisionBoardData.students.find(s => s.id === studentId);
+  if (!student) return false;
+
+  student.careerGoal = newGoal;
+  return true;
+};
+
+// Function to get current data (for React components to re-render)
+export const getCurrentVisionBoardData = (): VisionBoardData => {
+  return { ...globalVisionBoardData };
 };
