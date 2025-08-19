@@ -16,7 +16,24 @@ export default function TeacherDashboard() {
   const [currentTeacher, setCurrentTeacher] = useState<Teacher | null>(null);
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [selectedSubject, setSelectedSubject] = useState<string>('');
+  const [currentData, setCurrentData] = useState(visionBoardData);
+  const [feedbackMessage, setFeedbackMessage] = useState<string>('');
+  const [isUpdating, setIsUpdating] = useState<string>(''); // Track which milestone is being updated
   const navigate = useNavigate();
+
+  // Refresh data function
+  const refreshData = () => {
+    const newData = getCurrentVisionBoardData();
+    setCurrentData(newData);
+
+    // Update selected student with fresh data
+    if (selectedStudent) {
+      const updatedStudent = newData.students.find(s => s.id === selectedStudent.id);
+      if (updatedStudent) {
+        setSelectedStudent(updatedStudent);
+      }
+    }
+  };
 
   useEffect(() => {
     const teacherData = localStorage.getItem('currentTeacher');
