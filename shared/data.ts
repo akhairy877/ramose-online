@@ -70,7 +70,7 @@ const generateMilestones = (studentId: string): Milestone[] => {
 const generateAttempts = (): QuizAttempt[] => {
   const numAttempts = Math.floor(Math.random() * 3) + 1;
   const attempts: QuizAttempt[] = [];
-  
+
   for (let i = 1; i <= numAttempts; i++) {
     const grade = Math.floor(Math.random() * 101);
     attempts.push({
@@ -79,10 +79,49 @@ const generateAttempts = (): QuizAttempt[] => {
       passed: grade >= 60,
       date: new Date(2024, 0, (Math.random() * 365)).toISOString()
     });
-    
+
     if (grade >= 60) break; // Stop if passed
   }
-  
+
+  return attempts;
+};
+
+const generatePassingAttempts = (maxAttempts: number): QuizAttempt[] => {
+  const attempts: QuizAttempt[] = [];
+
+  for (let i = 1; i <= maxAttempts; i++) {
+    const isLastAttempt = i === maxAttempts;
+    const grade = isLastAttempt
+      ? Math.floor(Math.random() * 41) + 60 // 60-100 for passing
+      : Math.floor(Math.random() * 101); // Any grade for non-final attempts
+
+    attempts.push({
+      attempt: i,
+      grade,
+      passed: grade >= 60,
+      date: new Date(2024, 0, (Math.random() * 365)).toISOString()
+    });
+
+    if (grade >= 60) break; // Stop if passed
+  }
+
+  return attempts;
+};
+
+const generateFailingAttempts = (): QuizAttempt[] => {
+  const attempts: QuizAttempt[] = [];
+
+  // Always generate exactly 3 failing attempts
+  for (let i = 1; i <= 3; i++) {
+    const grade = Math.floor(Math.random() * 60); // 0-59 (failing grades)
+    attempts.push({
+      attempt: i,
+      grade,
+      passed: false,
+      date: new Date(2024, 0, (Math.random() * 365)).toISOString()
+    });
+  }
+
   return attempts;
 };
 
