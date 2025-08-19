@@ -121,20 +121,20 @@ export default function Index() {
           <Card className="mt-4 sm:mt-6 bg-gradient-to-r from-purple-100 to-pink-100 border-2 border-purple-200">
             <CardHeader className="pb-2 sm:pb-3 p-3 sm:p-6">
               <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 sm:gap-4">
-                <div className={cn("w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold text-white", selectedStudent.avatar.replace('200', '500'))}>
+                <div className={cn("w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold text-white", selectedStudent.avatar.replace('200', '500'))}>
                   {selectedStudent.name.charAt(0)}
                 </div>
-                <div>
-                  <h2 className="text-2xl font-bold text-purple-800">{selectedStudent.name}</h2>
-                  <p className="text-purple-600 flex items-center gap-2">
-                    <span>🎯 Dreams to be a</span>
-                    <Badge className="bg-purple-500 hover:bg-purple-600 text-white">
+                <div className="text-center sm:text-left">
+                  <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-purple-800">{selectedStudent.name}</h2>
+                  <div className="text-purple-600 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mt-1">
+                    <span className="text-sm sm:text-base">🎯 Dreams to be a</span>
+                    <Badge className="bg-purple-500 hover:bg-purple-600 text-white text-xs sm:text-sm">
                       {selectedStudent.careerGoal}
                     </Badge>
-                  </p>
-                  <p className="text-purple-600">
+                  </div>
+                  <p className="text-purple-600 text-sm sm:text-base mt-1">
                     <span>⭐ Total Points: </span>
-                    <span className="font-bold text-xl">{selectedStudent.totalPoints}</span>
+                    <span className="font-bold text-lg sm:text-xl">{selectedStudent.totalPoints}</span>
                   </p>
                 </div>
               </div>
