@@ -20,6 +20,7 @@ export default function Index() {
   // Debug logging
   console.log('Current data:', currentData);
   console.log('Subjects:', subjects);
+  console.log('Subjects length:', subjects?.length);
   console.log('Selected student:', selectedStudent);
   console.log('Selected student milestones:', selectedStudent?.milestones?.slice(0, 5));
 
