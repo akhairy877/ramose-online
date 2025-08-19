@@ -171,6 +171,13 @@ export default function Index() {
           </div>
         </div>
 
+        {/* Debug Info */}
+        <div className="bg-yellow-100 p-4 mb-4 rounded border">
+          <div className="text-sm">Debug: Subjects count: {subjects?.length || 0}</div>
+          <div className="text-sm">Available subjects: {subjects?.map(s => s.name).join(', ') || 'None'}</div>
+          <div className="text-sm">Student milestones count: {selectedStudent?.milestones?.length || 0}</div>
+        </div>
+
         {/* Vision Board Grid */}
         <div className="overflow-x-auto bg-gray-100 p-4 rounded-lg">
           <div className="min-w-[4500px] grid gap-3" style={{gridTemplateColumns: '200px repeat(36, minmax(120px, 1fr))'}}>
