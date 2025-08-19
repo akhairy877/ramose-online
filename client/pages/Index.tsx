@@ -213,27 +213,27 @@ export default function Index() {
                         {milestone ? (
                           <>
                             <div className="flex items-center justify-between mb-1">
-                              <span className="text-xl">{getStatusIcon(milestone.status)}</span>
+                              <span className="text-sm sm:text-lg lg:text-xl">{getStatusIcon(milestone.status)}</span>
                               <Badge className="text-xs px-1 py-0 bg-white/50 text-gray-800">
                                 {milestone.points}pts
                               </Badge>
                             </div>
                             <div className="text-center flex-1">
-                              <div className="text-xs font-bold mb-1 leading-tight">{milestone.lessonTitle}</div>
-                              <div className="text-xs text-gray-600 mb-2 leading-tight">
+                              <div className="text-xs font-bold mb-1 leading-tight hidden sm:block">{milestone.lessonTitle}</div>
+                              <div className="text-xs text-gray-600 mb-2 leading-tight hidden lg:block">
                                 {milestone.careerRelevance.substring(0, 40)}...
                               </div>
                               {milestone.quizAttempts.length > 0 ? (
                                 <div className="space-y-1">
-                                  <div className="text-xs font-medium">
+                                  <div className="text-xs font-medium hidden sm:block">
                                     Attempts: {milestone.quizAttempts.length}/{milestone.maxAttempts}
                                   </div>
-                                  <div className="text-xs">
+                                  <div className="text-xs hidden lg:block">
                                     Best: {Math.max(...milestone.quizAttempts.map(a => a.grade))}%
                                   </div>
                                 </div>
                               ) : (
-                                <div className="text-xs text-gray-500">
+                                <div className="text-xs text-gray-500 hidden sm:block">
                                   {milestone.status === 'not-started' ? 'Not Started' : 'Ready to Start'}
                                 </div>
                               )}
