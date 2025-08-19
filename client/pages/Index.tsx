@@ -171,10 +171,12 @@ export default function Index() {
         </div>
 
         {/* Vision Board Grid */}
-        <div className="overflow-x-auto">
-          <div className="min-w-[2400px] sm:min-w-[3600px] lg:min-w-[4500px] grid grid-cols-37 gap-1 sm:gap-2 lg:gap-3">
+        <div className="overflow-x-auto bg-gray-100 p-4 rounded-lg">
+          <div className="min-w-[2400px] sm:min-w-[3600px] lg:min-w-[4500px] grid gap-1 sm:gap-2 lg:gap-3" style={{gridTemplateColumns: '200px repeat(36, minmax(120px, 1fr))'}}>
             {/* Header Row */}
-            <div className="col-span-1 sticky left-0 bg-white z-10"></div>
+            <div className="sticky left-0 bg-white z-10 p-2 rounded border">
+              <div className="font-bold text-center text-purple-700">Subjects</div>
+            </div>
             {weeks.map(week => (
               <div key={week} className={cn("text-center p-1 sm:p-2 lg:p-3 bg-white rounded-lg shadow-sm border-2",
                 week === currentWeek ? 'border-blue-400 bg-blue-50' : 'border-gray-200',
