@@ -118,9 +118,9 @@ export default function Index() {
           </div>
 
           {/* Student Info Card */}
-          <Card className="mt-6 bg-gradient-to-r from-purple-100 to-pink-100 border-2 border-purple-200">
-            <CardHeader className="pb-3">
-              <div className="flex items-center gap-4">
+          <Card className="mt-4 sm:mt-6 bg-gradient-to-r from-purple-100 to-pink-100 border-2 border-purple-200">
+            <CardHeader className="pb-2 sm:pb-3 p-3 sm:p-6">
+              <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 sm:gap-4">
                 <div className={cn("w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold text-white", selectedStudent.avatar.replace('200', '500'))}>
                   {selectedStudent.name.charAt(0)}
                 </div>
