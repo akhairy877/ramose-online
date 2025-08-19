@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { visionBoardData } from '@shared/data';
 import { Student, Milestone, Subject } from '@shared/types';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -13,10 +14,15 @@ export default function Index() {
   const [selectedMilestone, setSelectedMilestone] = useState<Milestone | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { subjects, currentWeek } = visionBoardData;
+  const navigate = useNavigate();
 
   const handleMilestoneClick = (milestone: Milestone) => {
     setSelectedMilestone(milestone);
     setIsDialogOpen(true);
+  };
+
+  const handleTeacherDashboardClick = () => {
+    navigate('/teacher/login');
   };
 
   const getStatusColor = (status: Milestone['status']) => {
@@ -258,7 +264,10 @@ export default function Index() {
 
         {/* Teacher Access */}
         <div className="mt-6 text-center">
-          <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3">
+          <Button
+            onClick={handleTeacherDashboardClick}
+            className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3"
+          >
             🏫 Teacher Dashboard
           </Button>
         </div>
