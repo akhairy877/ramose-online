@@ -147,15 +147,15 @@ export default function Index() {
       <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-6">
         <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row items-center gap-2 sm:gap-4 flex-wrap">
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-gray-700">Current Week:</span>
-            <Badge className="bg-blue-500 text-white text-lg px-3 py-1">
+            <span className="text-xs sm:text-sm font-medium text-gray-700">Current Week:</span>
+            <Badge className="bg-blue-500 text-white text-sm sm:text-lg px-2 sm:px-3 py-1">
               Week {currentWeek}
             </Badge>
           </div>
-          <div className="flex items-center gap-2 text-sm text-gray-600">
+          <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
             <span>Progress:</span>
-            <div className="w-32 bg-gray-200 rounded-full h-2">
-              <div 
+            <div className="w-24 sm:w-32 bg-gray-200 rounded-full h-2">
+              <div
                 className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full"
                 style={{ width: `${(currentWeek / 36) * 100}%` }}
               />
