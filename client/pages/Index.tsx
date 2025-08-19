@@ -10,11 +10,36 @@ import { MilestoneDialog } from '@/components/MilestoneDialog';
 import { cn } from '@/lib/utils';
 
 export default function Index() {
+  const [currentData, setCurrentData] = useState(visionBoardData);
   const [selectedStudent, setSelectedStudent] = useState<Student>(visionBoardData.students[0]);
   const [selectedMilestone, setSelectedMilestone] = useState<Milestone | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const { subjects, currentWeek } = visionBoardData;
+  const { subjects, currentWeek } = currentData;
   const navigate = useNavigate();
+
+  // Refresh data on component mount and periodically
+  useEffect(() => {
+    const refreshData = () => {
+      const newData = getCurrentVisionBoardData();
+      setCurrentData(newData);
+
+      // Update selected student with fresh data
+      if (selectedStudent) {
+        const updatedStudent = newData.students.find(s => s.id === selectedStudent.id);
+        if (updatedStudent) {
+          setSelectedStudent(updatedStudent);
+        }
+      }
+    };
+
+    // Initial refresh
+    refreshData();
+
+    // Set up interval to refresh every 5 seconds
+    const interval = setInterval(refreshData, 5000);
+
+    return () => clearInterval(interval);
+  }, [selectedStudent?.id]);
 
   const handleMilestoneClick = (milestone: Milestone) => {
     setSelectedMilestone(milestone);
