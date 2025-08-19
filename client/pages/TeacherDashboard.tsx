@@ -280,7 +280,8 @@ export default function TeacherDashboard() {
                               size="sm"
                               variant={milestone.status === status ? "default" : "outline"}
                               className="text-xs px-2 py-1 h-auto"
-                              onClick={() => updateMilestoneStatus(selectedStudent.id, milestone.id, status as Milestone['status'])}
+                              onClick={() => handleMilestoneStatusUpdate(selectedStudent.id, milestone.id, status as Milestone['status'])}
+                              disabled={isUpdating === milestone.id}
                             >
                               {status === 'not-started' ? '⏳' :
                                status === 'in-progress' ? '🔄' :
