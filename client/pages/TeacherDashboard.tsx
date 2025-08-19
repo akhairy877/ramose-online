@@ -201,7 +201,7 @@ export default function TeacherDashboard() {
                     <Input 
                       defaultValue={selectedStudent.careerGoal}
                       className="mt-1 border-purple-200"
-                      onBlur={(e) => updateStudentCareerGoal(selectedStudent.id, e.target.value)}
+                      onBlur={(e) => handleCareerGoalUpdate(selectedStudent.id, e.target.value)}
                     />
                   </div>
                   <div className="text-sm text-gray-600">
