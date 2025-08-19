@@ -99,7 +99,7 @@ export default function Index() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="max-h-60">
-                  {visionBoardData.students.map((student) => (
+                  {currentData.students.map((student) => (
                     <SelectItem key={student.id} value={student.id}>
                       <div className="flex items-center gap-3">
                         <div className={cn("w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold", student.avatar)}>
