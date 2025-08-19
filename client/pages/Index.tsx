@@ -10,8 +10,8 @@ import { MilestoneDialog } from '@/components/MilestoneDialog';
 import { cn } from '@/lib/utils';
 
 export default function Index() {
-  const [currentData, setCurrentData] = useState(visionBoardData);
-  const [selectedStudent, setSelectedStudent] = useState<Student>(visionBoardData.students[0]);
+  const [currentData, setCurrentData] = useState(() => getCurrentVisionBoardData());
+  const [selectedStudent, setSelectedStudent] = useState<Student>(() => getCurrentVisionBoardData().students[0]);
   const [selectedMilestone, setSelectedMilestone] = useState<Milestone | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { subjects, currentWeek } = currentData;
