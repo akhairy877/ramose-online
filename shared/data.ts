@@ -205,6 +205,11 @@ let globalVisionBoardData: VisionBoardData = {
   totalWeeks: 36
 };
 
+// Force data regeneration for debugging
+console.log('Generated students:', globalVisionBoardData.students.length);
+console.log('Available subjects:', globalVisionBoardData.subjects);
+console.log('Sample student milestones:', globalVisionBoardData.students[0]?.milestones?.slice(0, 3));
+
 export const visionBoardData: VisionBoardData = globalVisionBoardData;
 
 // Function to update milestone status
