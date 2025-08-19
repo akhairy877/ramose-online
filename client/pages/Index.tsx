@@ -92,7 +92,7 @@ export default function Index() {
             {/* Student Selector */}
             <div className="w-full lg:w-auto min-w-[300px]">
               <Select value={selectedStudent.id} onValueChange={(value) => {
-                const student = visionBoardData.students.find(s => s.id === value);
+                const student = currentData.students.find(s => s.id === value);
                 if (student) setSelectedStudent(student);
               }}>
                 <SelectTrigger className="w-full bg-white border-2 border-purple-200 hover:border-purple-300">
