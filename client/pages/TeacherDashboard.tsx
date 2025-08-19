@@ -65,14 +65,41 @@ export default function TeacherDashboard() {
     return student.milestones.filter(m => m.subject === subjectId);
   };
 
-  const updateMilestoneStatus = (studentId: string, milestoneId: string, newStatus: Milestone['status']) => {
-    // In a real app, this would update the backend
-    console.log(`Updating milestone ${milestoneId} for student ${studentId} to status: ${newStatus}`);
+  const handleMilestoneStatusUpdate = async (studentId: string, milestoneId: string, newStatus: Milestone['status']) => {
+    setIsUpdating(milestoneId);
+
+    try {
+      const success = updateMilestoneStatus(studentId, milestoneId, newStatus);
+
+      if (success) {
+        setFeedbackMessage(`Successfully updated milestone status to ${newStatus.replace('-', ' ')}`);
+        refreshData();
+
+        // Clear feedback after 3 seconds
+        setTimeout(() => setFeedbackMessage(''), 3000);
+      } else {
+        setFeedbackMessage('Failed to update milestone status');
+      }
+    } catch (error) {
+      setFeedbackMessage('Error updating milestone status');
+      console.error('Error updating milestone:', error);
+    } finally {
+      setIsUpdating('');
+    }
   };
 
-  const updateStudentCareerGoal = (studentId: string, newGoal: string) => {
-    // In a real app, this would update the backend
-    console.log(`Updating career goal for student ${studentId} to: ${newGoal}`);
+  const handleCareerGoalUpdate = (studentId: string, newGoal: string) => {
+    const success = updateStudentCareerGoal(studentId, newGoal);
+
+    if (success) {
+      setFeedbackMessage('Career goal updated successfully');
+      refreshData();
+
+      // Clear feedback after 3 seconds
+      setTimeout(() => setFeedbackMessage(''), 3000);
+    } else {
+      setFeedbackMessage('Failed to update career goal');
+    }
   };
 
   if (!currentTeacher) {
