@@ -173,7 +173,7 @@ export default function Index() {
 
         {/* Vision Board Grid */}
         <div className="overflow-x-auto bg-gray-100 p-4 rounded-lg">
-          <div className="min-w-[2400px] sm:min-w-[3600px] lg:min-w-[4500px] grid gap-1 sm:gap-2 lg:gap-3" style={{gridTemplateColumns: '200px repeat(36, minmax(120px, 1fr))'}}>
+          <div className="min-w-[4500px] grid gap-3" style={{gridTemplateColumns: '200px repeat(36, minmax(120px, 1fr))'}}>
             {/* Header Row */}
             <div className="sticky left-0 bg-white z-10 p-2 rounded border">
               <div className="font-bold text-center text-purple-700">Subjects</div>
