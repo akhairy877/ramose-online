@@ -203,13 +203,13 @@ export default function Index() {
                   return (
                     <Card
                       key={`${subject.id}-${week}`}
-                      className={cn("h-32 relative overflow-hidden border-2 transition-all hover:shadow-lg cursor-pointer hover:scale-105",
+                      className={cn("h-20 sm:h-24 lg:h-32 relative overflow-hidden border-2 transition-all hover:shadow-lg cursor-pointer hover:scale-105",
                         milestone ? getStatusColor(milestone.status) : 'bg-gray-50 border-gray-200',
                         week === currentWeek ? 'ring-2 ring-blue-400 ring-offset-2' : ''
                       )}
                       onClick={() => milestone && handleMilestoneClick(milestone)}
                     >
-                      <CardContent className="p-3 h-full flex flex-col justify-between">
+                      <CardContent className="p-1 sm:p-2 lg:p-3 h-full flex flex-col justify-between">
                         {milestone ? (
                           <>
                             <div className="flex items-center justify-between mb-1">
