@@ -90,7 +90,7 @@ export default function Index() {
             </div>
             
             {/* Student Selector */}
-            <div className="w-full lg:w-auto min-w-[300px]">
+            <div className="w-full sm:w-auto lg:w-auto min-w-[250px] sm:min-w-[300px]">
               <Select value={selectedStudent.id} onValueChange={(value) => {
                 const student = currentData.students.find(s => s.id === value);
                 if (student) setSelectedStudent(student);
