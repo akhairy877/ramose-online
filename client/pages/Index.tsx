@@ -257,41 +257,41 @@ export default function Index() {
         </div>
 
         {/* Legend */}
-        <Card className="mt-6 bg-white">
+        <Card className="mt-4 sm:mt-6 bg-white">
           <CardHeader>
-            <h3 className="text-lg font-bold text-gray-800">Legend</h3>
+            <h3 className="text-base sm:text-lg font-bold text-gray-800">Legend</h3>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 sm:gap-4">
               <div className="flex items-center gap-2">
-                <span className="text-xl">✅</span>
-                <span className="text-sm">Passed</span>
+                <span className="text-lg sm:text-xl">✅</span>
+                <span className="text-xs sm:text-sm">Passed</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-xl">⚠️</span>
-                <span className="text-sm">Can Retry</span>
+                <span className="text-lg sm:text-xl">⚠️</span>
+                <span className="text-xs sm:text-sm">Can Retry</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-xl">❌</span>
-                <span className="text-sm">Failed (3 attempts)</span>
+                <span className="text-lg sm:text-xl">❌</span>
+                <span className="text-xs sm:text-sm">Failed (3 attempts)</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-xl">🔄</span>
-                <span className="text-sm">In Progress</span>
+                <span className="text-lg sm:text-xl">🔄</span>
+                <span className="text-xs sm:text-sm">In Progress</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-xl">⏳</span>
-                <span className="text-sm">Not Started</span>
+                <span className="text-lg sm:text-xl">⏳</span>
+                <span className="text-xs sm:text-sm">Not Started</span>
               </div>
             </div>
           </CardContent>
         </Card>
 
         {/* Teacher Access */}
-        <div className="mt-6 text-center">
+        <div className="mt-4 sm:mt-6 text-center">
           <Button
             onClick={handleTeacherDashboardClick}
-            className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3"
+            className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base"
           >
             🏫 Teacher Dashboard
           </Button>
