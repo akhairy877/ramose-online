@@ -111,6 +111,6 @@
   }
 
   .grid-cols-37 {
-    grid-template-columns: auto repeat(36, minmax(80px, 1fr));
+    grid-template-columns: 200px repeat(36, minmax(120px, 1fr));
   }
 }
