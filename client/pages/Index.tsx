@@ -5,11 +5,19 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { MilestoneDialog } from '@/components/MilestoneDialog';
 import { cn } from '@/lib/utils';
 
 export default function Index() {
   const [selectedStudent, setSelectedStudent] = useState<Student>(visionBoardData.students[0]);
+  const [selectedMilestone, setSelectedMilestone] = useState<Milestone | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { subjects, currentWeek } = visionBoardData;
+
+  const handleMilestoneClick = (milestone: Milestone) => {
+    setSelectedMilestone(milestone);
+    setIsDialogOpen(true);
+  };
 
   const getStatusColor = (status: Milestone['status']) => {
     switch (status) {
@@ -162,10 +170,14 @@ export default function Index() {
                 {weeks.map(week => {
                   const milestone = getMilestonesBySubjectAndWeek(subject.id, week);
                   return (
-                    <Card key={`${subject.id}-${week}`} className={cn("h-32 relative overflow-hidden border-2 transition-all hover:shadow-lg cursor-pointer",
-                      milestone ? getStatusColor(milestone.status) : 'bg-gray-50 border-gray-200',
-                      week === currentWeek ? 'ring-2 ring-blue-400 ring-offset-2' : ''
-                    )}>
+                    <Card
+                      key={`${subject.id}-${week}`}
+                      className={cn("h-32 relative overflow-hidden border-2 transition-all hover:shadow-lg cursor-pointer hover:scale-105",
+                        milestone ? getStatusColor(milestone.status) : 'bg-gray-50 border-gray-200',
+                        week === currentWeek ? 'ring-2 ring-blue-400 ring-offset-2' : ''
+                      )}
+                      onClick={() => milestone && handleMilestoneClick(milestone)}
+                    >
                       <CardContent className="p-3 h-full flex flex-col justify-between">
                         {milestone ? (
                           <>
@@ -251,6 +263,13 @@ export default function Index() {
           </Button>
         </div>
       </div>
+
+      {/* Milestone Detail Dialog */}
+      <MilestoneDialog
+        milestone={selectedMilestone}
+        isOpen={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+      />
     </div>
   );
 }
