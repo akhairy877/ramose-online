@@ -35,17 +35,31 @@ const generateMilestones = (studentId: string): Milestone[] => {
       let attempts: QuizAttempt[] = [];
       let status: Milestone['status'] = 'not-started';
 
-      // Only generate attempts for weeks that have passed or current week
       if (week < currentWeek) {
-        // Past weeks - should have attempts
-        attempts = Math.random() > 0.3 ? generateAttempts() : [];
-        status = getStatusFromAttempts(attempts, true);
+        // Past weeks - MUST have either passed or failed (3 attempts)
+        const shouldPass = Math.random() > 0.3; // 70% chance to pass
+
+        if (shouldPass) {
+          // Generate passing attempts (1-2 attempts usually)
+          const numAttempts = Math.random() > 0.6 ? 1 : Math.random() > 0.8 ? 2 : 3;
+          attempts = generatePassingAttempts(numAttempts);
+          status = 'passed';
+        } else {
+          // Generate 3 failing attempts
+          attempts = generateFailingAttempts();
+          status = 'failed-permanent';
+        }
       } else if (week === currentWeek) {
-        // Current week - may or may not have attempts
-        attempts = Math.random() > 0.5 ? generateAttempts() : [];
-        status = attempts.length > 0 ? getStatusFromAttempts(attempts, true) : 'in-progress';
+        // Current week - may be in progress, passed, or failed
+        const currentStatus = Math.random();
+        if (currentStatus > 0.6) {
+          attempts = generateAttempts();
+          status = getStatusFromAttempts(attempts, true);
+        } else {
+          status = 'in-progress';
+        }
       } else {
-        // Future weeks - no attempts, not started
+        // Future weeks - not started
         attempts = [];
         status = 'not-started';
       }
