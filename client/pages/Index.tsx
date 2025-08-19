@@ -127,13 +127,20 @@ export default function Index() {
 
         {/* Vision Board Grid */}
         <div className="overflow-x-auto">
-          <div className="min-w-[1200px] grid grid-cols-37 gap-2">
+          <div className="min-w-[4500px] grid grid-cols-37 gap-3">
             {/* Header Row */}
             <div className="col-span-1 sticky left-0 bg-white z-10"></div>
             {weeks.map(week => (
-              <div key={week} className="text-center p-2 bg-white rounded-lg shadow-sm border">
-                <div className="text-xs font-medium text-gray-600">Week</div>
-                <div className="text-sm font-bold text-purple-600">{week}</div>
+              <div key={week} className={cn("text-center p-3 bg-white rounded-lg shadow-sm border-2",
+                week === currentWeek ? 'border-blue-400 bg-blue-50' : 'border-gray-200',
+                week < currentWeek ? 'bg-green-50 border-green-200' : '',
+                week > currentWeek ? 'bg-gray-50 border-gray-200' : ''
+              )}>
+                <div className="text-xs font-medium text-gray-600 mb-1">Week</div>
+                <div className="text-lg font-bold text-purple-600 mb-1">{week}</div>
+                <div className="text-xs text-gray-500">
+                  {week < currentWeek ? 'Past' : week === currentWeek ? 'Current' : 'Future'}
+                </div>
               </div>
             ))}
 
@@ -141,10 +148,13 @@ export default function Index() {
             {subjects.map((subject) => (
               <div key={subject.id} className="contents">
                 {/* Subject Header */}
-                <div className="sticky left-0 bg-white z-10 p-3 border rounded-lg shadow-sm">
-                  <div className={cn("w-full h-16 rounded-lg flex flex-col items-center justify-center text-white font-bold", subject.color)}>
-                    <div className="text-2xl">{subject.icon}</div>
-                    <div className="text-xs text-center">{subject.name}</div>
+                <div className="sticky left-0 bg-white z-10 p-3 border-2 rounded-lg shadow-md">
+                  <div className={cn("w-full h-24 rounded-lg flex flex-col items-center justify-center text-white font-bold", subject.color)}>
+                    <div className="text-3xl mb-1">{subject.icon}</div>
+                    <div className="text-sm text-center font-bold">{subject.name}</div>
+                    <div className="text-xs text-center opacity-90 mt-1">
+                      36 Lessons
+                    </div>
                   </div>
                 </div>
 
@@ -152,29 +162,46 @@ export default function Index() {
                 {weeks.map(week => {
                   const milestone = getMilestonesBySubjectAndWeek(subject.id, week);
                   return (
-                    <Card key={`${subject.id}-${week}`} className={cn("h-20 relative overflow-hidden border-2 transition-all hover:shadow-lg cursor-pointer", 
+                    <Card key={`${subject.id}-${week}`} className={cn("h-32 relative overflow-hidden border-2 transition-all hover:shadow-lg cursor-pointer",
                       milestone ? getStatusColor(milestone.status) : 'bg-gray-50 border-gray-200',
                       week === currentWeek ? 'ring-2 ring-blue-400 ring-offset-2' : ''
                     )}>
-                      <CardContent className="p-2 h-full flex flex-col justify-between">
+                      <CardContent className="p-3 h-full flex flex-col justify-between">
                         {milestone ? (
                           <>
-                            <div className="flex items-center justify-between">
-                              <span className="text-lg">{getStatusIcon(milestone.status)}</span>
-                              <span className="text-xs font-bold">{milestone.points}pts</span>
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="text-xl">{getStatusIcon(milestone.status)}</span>
+                              <Badge className="text-xs px-1 py-0 bg-white/50 text-gray-800">
+                                {milestone.points}pts
+                              </Badge>
                             </div>
-                            <div className="text-center">
-                              <div className="text-xs font-medium truncate">{milestone.lessonTitle}</div>
-                              {milestone.quizAttempts.length > 0 && (
-                                <div className="text-xs opacity-75">
-                                  Attempts: {milestone.quizAttempts.length}/{milestone.maxAttempts}
+                            <div className="text-center flex-1">
+                              <div className="text-xs font-bold mb-1 leading-tight">{milestone.lessonTitle}</div>
+                              <div className="text-xs text-gray-600 mb-2 leading-tight">
+                                {milestone.careerRelevance.substring(0, 40)}...
+                              </div>
+                              {milestone.quizAttempts.length > 0 ? (
+                                <div className="space-y-1">
+                                  <div className="text-xs font-medium">
+                                    Attempts: {milestone.quizAttempts.length}/{milestone.maxAttempts}
+                                  </div>
+                                  <div className="text-xs">
+                                    Best: {Math.max(...milestone.quizAttempts.map(a => a.grade))}%
+                                  </div>
+                                </div>
+                              ) : (
+                                <div className="text-xs text-gray-500">
+                                  {milestone.status === 'not-started' ? 'Not Started' : 'Ready to Start'}
                                 </div>
                               )}
                             </div>
                           </>
                         ) : (
                           <div className="flex items-center justify-center h-full text-gray-400">
-                            <span className="text-lg">⏳</span>
+                            <div className="text-center">
+                              <span className="text-2xl block mb-1">⏳</span>
+                              <span className="text-xs">Not Started</span>
+                            </div>
                           </div>
                         )}
                       </CardContent>
