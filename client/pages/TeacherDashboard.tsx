@@ -113,15 +113,15 @@ export default function TeacherDashboard() {
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
       {/* Header */}
       <div className="bg-white shadow-lg border-b-4 border-gradient-to-r from-indigo-500 to-purple-500">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
-            <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+        <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-6">
+          <div className="flex flex-col sm:flex-row lg:flex-row items-center justify-between gap-2 sm:gap-4">
+            <div className="text-center sm:text-left">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                 🏫 Teacher Dashboard
               </h1>
-              <p className="text-gray-600 mt-1">Welcome back, {currentTeacher.name}!</p>
+              <p className="text-gray-600 mt-1 text-sm sm:text-base">Welcome back, {currentTeacher.name}!</p>
             </div>
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
               <Button onClick={() => navigate('/')} variant="outline" className="border-purple-200 text-purple-600">
                 👁️ View Vision Board
               </Button>
@@ -163,7 +163,7 @@ export default function TeacherDashboard() {
           </Alert>
         )}
 
-        <div className="grid lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
           {/* Student Selection */}
           <Card>
             <CardHeader>
@@ -204,7 +204,7 @@ export default function TeacherDashboard() {
                       onBlur={(e) => handleCareerGoalUpdate(selectedStudent.id, e.target.value)}
                     />
                   </div>
-                  <div className="text-sm text-gray-600">
+                  <div className="text-xs sm:text-sm text-gray-600">
                     <div><strong>Total Points:</strong> {selectedStudent.totalPoints}</div>
                     <div><strong>Total Milestones:</strong> {selectedStudent.milestones.length}</div>
                   </div>
@@ -234,7 +234,7 @@ export default function TeacherDashboard() {
                   >
                     <span className="text-2xl">{subject.icon}</span>
                     <div className="text-left">
-                      <div className="font-medium">{subject.name}</div>
+                      <div className="font-medium text-sm sm:text-base">{subject.name}</div>
                       <div className="text-xs opacity-75">36 weeks curriculum</div>
                     </div>
                   </Button>
@@ -304,12 +304,12 @@ export default function TeacherDashboard() {
         </div>
 
         {/* Class Overview */}
-        <Card className="mt-6">
+        <Card className="mt-4 sm:mt-6">
           <CardHeader>
-            <CardTitle className="text-blue-700">📈 Class Overview</CardTitle>
+            <CardTitle className="text-blue-700 text-lg sm:text-xl">📈 Class Overview</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
               <div className="text-center p-4 bg-blue-50 rounded-lg">
                 <div className="text-2xl font-bold text-blue-600">{students.length}</div>
                 <div className="text-sm text-blue-700">Total Students</div>
