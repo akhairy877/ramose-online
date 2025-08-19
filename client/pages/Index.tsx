@@ -144,8 +144,8 @@ export default function Index() {
       </div>
 
       {/* Main Vision Board */}
-      <div className="container mx-auto px-4 py-6">
-        <div className="mb-6 flex items-center gap-4 flex-wrap">
+      <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-6">
+        <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row items-center gap-2 sm:gap-4 flex-wrap">
           <div className="flex items-center gap-2">
             <span className="text-sm font-medium text-gray-700">Current Week:</span>
             <Badge className="bg-blue-500 text-white text-lg px-3 py-1">
