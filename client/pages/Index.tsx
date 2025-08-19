@@ -187,11 +187,11 @@ export default function Index() {
             {subjects.map((subject) => (
               <div key={subject.id} className="contents">
                 {/* Subject Header */}
-                <div className="sticky left-0 bg-white z-10 p-3 border-2 rounded-lg shadow-md">
-                  <div className={cn("w-full h-24 rounded-lg flex flex-col items-center justify-center text-white font-bold", subject.color)}>
-                    <div className="text-3xl mb-1">{subject.icon}</div>
-                    <div className="text-sm text-center font-bold">{subject.name}</div>
-                    <div className="text-xs text-center opacity-90 mt-1">
+                <div className="sticky left-0 bg-white z-10 p-1 sm:p-2 lg:p-3 border-2 rounded-lg shadow-md">
+                  <div className={cn("w-full h-16 sm:h-20 lg:h-24 rounded-lg flex flex-col items-center justify-center text-white font-bold", subject.color)}>
+                    <div className="text-xl sm:text-2xl lg:text-3xl mb-1">{subject.icon}</div>
+                    <div className="text-xs sm:text-sm text-center font-bold leading-tight">{subject.name}</div>
+                    <div className="text-xs text-center opacity-90 mt-1 hidden sm:block">
                       36 Lessons
                     </div>
                   </div>
