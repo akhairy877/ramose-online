@@ -166,7 +166,7 @@ export default function Index() {
 
         {/* Vision Board Grid */}
         <div className="overflow-x-auto">
-          <div className="min-w-[4500px] grid grid-cols-37 gap-3">
+          <div className="min-w-[2400px] sm:min-w-[3600px] lg:min-w-[4500px] grid grid-cols-37 gap-1 sm:gap-2 lg:gap-3">
             {/* Header Row */}
             <div className="col-span-1 sticky left-0 bg-white z-10"></div>
             {weeks.map(week => (
