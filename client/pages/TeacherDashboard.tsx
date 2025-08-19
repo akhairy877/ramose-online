@@ -51,7 +51,7 @@ export default function TeacherDashboard() {
 
   const getStudentsForTeacher = () => {
     if (!currentTeacher) return [];
-    return visionBoardData.students;
+    return currentData.students;
   };
 
   const getSubjectsForTeacher = () => {
@@ -60,7 +60,7 @@ export default function TeacherDashboard() {
   };
 
   const getMilestonesForStudentAndSubject = (studentId: string, subjectId: string) => {
-    const student = visionBoardData.students.find(s => s.id === studentId);
+    const student = currentData.students.find(s => s.id === studentId);
     if (!student) return [];
     return student.milestones.filter(m => m.subject === subjectId);
   };
