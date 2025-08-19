@@ -170,14 +170,14 @@ export default function Index() {
             {/* Header Row */}
             <div className="col-span-1 sticky left-0 bg-white z-10"></div>
             {weeks.map(week => (
-              <div key={week} className={cn("text-center p-3 bg-white rounded-lg shadow-sm border-2",
+              <div key={week} className={cn("text-center p-1 sm:p-2 lg:p-3 bg-white rounded-lg shadow-sm border-2",
                 week === currentWeek ? 'border-blue-400 bg-blue-50' : 'border-gray-200',
                 week < currentWeek ? 'bg-green-50 border-green-200' : '',
                 week > currentWeek ? 'bg-gray-50 border-gray-200' : ''
               )}>
                 <div className="text-xs font-medium text-gray-600 mb-1">Week</div>
-                <div className="text-lg font-bold text-purple-600 mb-1">{week}</div>
-                <div className="text-xs text-gray-500">
+                <div className="text-sm sm:text-base lg:text-lg font-bold text-purple-600 mb-1">{week}</div>
+                <div className="text-xs text-gray-500 hidden sm:block">
                   {week < currentWeek ? 'Past' : week === currentWeek ? 'Current' : 'Future'}
                 </div>
               </div>
