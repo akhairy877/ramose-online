@@ -1,12 +1,12 @@
 import { VisionBoardData, Student, Subject, Teacher, Milestone, QuizAttempt } from './types';
 
 export const subjects: Subject[] = [
-  { id: 'math', name: 'Mathematics', color: 'bg-blue-500', icon: '🔢' },
-  { id: 'english', name: 'English', color: 'bg-green-500', icon: '📚' },
-  { id: 'science', name: 'Science', color: 'bg-purple-500', icon: '🔬' },
-  { id: 'art', name: 'Art', color: 'bg-pink-500', icon: '🎨' },
-  { id: 'pe', name: 'Physical Education', color: 'bg-orange-500', icon: '⚽' },
-  { id: 'music', name: 'Music', color: 'bg-yellow-500', icon: '🎵' }
+  { id: 'math', name: 'Mathematics', color: 'bg-blue-500 hover:bg-blue-600', icon: '🔢' },
+  { id: 'english', name: 'English', color: 'bg-green-500 hover:bg-green-600', icon: '📚' },
+  { id: 'science', name: 'Science', color: 'bg-purple-500 hover:bg-purple-600', icon: '🔬' },
+  { id: 'art', name: 'Art', color: 'bg-pink-500 hover:bg-pink-600', icon: '🎨' },
+  { id: 'pe', name: 'Physical Education', color: 'bg-orange-500 hover:bg-orange-600', icon: '⚽' },
+  { id: 'music', name: 'Music', color: 'bg-yellow-500 hover:bg-yellow-600', icon: '🎵' }
 ];
 
 export const teachers: Teacher[] = [
