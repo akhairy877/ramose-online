@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { visionBoardData } from '@shared/data';
+import { visionBoardData, getCurrentVisionBoardData } from '@shared/data';
 import { Student, Milestone, Subject } from '@shared/types';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
