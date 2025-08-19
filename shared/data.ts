@@ -27,16 +27,32 @@ const avatarColors = [
 
 const generateMilestones = (studentId: string): Milestone[] => {
   const milestones: Milestone[] = [];
-  
+  const currentWeek = 12; // Current week from visionBoardData
+
   subjects.forEach(subject => {
     for (let week = 1; week <= 36; week++) {
       const id = `${studentId}-${subject.id}-${week}`;
-      const attempts = Math.random() > 0.7 ? [] : generateAttempts();
-      const status = getStatusFromAttempts(attempts);
-      
+      let attempts: QuizAttempt[] = [];
+      let status: Milestone['status'] = 'not-started';
+
+      // Only generate attempts for weeks that have passed or current week
+      if (week < currentWeek) {
+        // Past weeks - should have attempts
+        attempts = Math.random() > 0.3 ? generateAttempts() : [];
+        status = getStatusFromAttempts(attempts, true);
+      } else if (week === currentWeek) {
+        // Current week - may or may not have attempts
+        attempts = Math.random() > 0.5 ? generateAttempts() : [];
+        status = attempts.length > 0 ? getStatusFromAttempts(attempts, true) : 'in-progress';
+      } else {
+        // Future weeks - no attempts, not started
+        attempts = [];
+        status = 'not-started';
+      }
+
       milestones.push({
         id,
-        lessonTitle: `${subject.name} Week ${week}`,
+        lessonTitle: `${subject.name} Lesson ${week}`,
         week,
         subject: subject.id,
         careerRelevance: getCareerRelevance(subject.name),
@@ -47,7 +63,7 @@ const generateMilestones = (studentId: string): Milestone[] => {
       });
     }
   });
-  
+
   return milestones;
 };
 
@@ -70,12 +86,14 @@ const generateAttempts = (): QuizAttempt[] => {
   return attempts;
 };
 
-const getStatusFromAttempts = (attempts: QuizAttempt[]): Milestone['status'] => {
-  if (attempts.length === 0) return 'not-started';
-  
+const getStatusFromAttempts = (attempts: QuizAttempt[], isCurrentOrPast: boolean = false): Milestone['status'] => {
+  if (attempts.length === 0) {
+    return isCurrentOrPast ? 'not-started' : 'not-started';
+  }
+
   const lastAttempt = attempts[attempts.length - 1];
   if (lastAttempt.passed) return 'passed';
-  
+
   if (attempts.length >= 3) return 'failed-permanent';
   return 'failed-retryable';
 };
