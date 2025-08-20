@@ -17,12 +17,6 @@ export default function Index() {
   const { subjects, currentWeek } = currentData;
   const navigate = useNavigate();
 
-  // Debug logging
-  console.log('Current data:', currentData);
-  console.log('Subjects:', subjects);
-  console.log('Subjects length:', subjects?.length);
-  console.log('Selected student:', selectedStudent);
-  console.log('Selected student milestones:', selectedStudent?.milestones?.slice(0, 5));
 
   // Refresh data on component mount and periodically
   useEffect(() => {
