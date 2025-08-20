@@ -107,7 +107,7 @@ export default function TeacherLogin() {
               <h4 className="text-sm font-medium text-blue-800 mb-2">Demo Credentials:</h4>
               <div className="text-sm text-blue-700 space-y-1">
                 <div><strong>Username:</strong> ahmed.elagamy</div>
-                <div><strong>Password:</strong> 12345678</div>
+                <div><strong>Password:</strong> +201015323048</div>
               </div>
             </div>
 
