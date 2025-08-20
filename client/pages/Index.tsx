@@ -180,10 +180,9 @@ export default function Index() {
 
         {/* Vision Board Grid */}
         <div className="overflow-x-auto bg-gray-100 p-4 rounded-lg">
-          <div className="min-w-[4500px] grid gap-3" style={{gridTemplateColumns: '200px repeat(36, minmax(120px, 1fr))'}}>
-            {/* Header Row */}
+          <div className="min-w-[4500px] grid gap-3" style={{gridTemplateColumns: '160px repeat(36, minmax(120px, 1fr))'}}>            {/* Header Row */}
             <div className="sticky left-0 bg-white z-10 p-2 rounded border">
-              <div className="font-bold text-center text-purple-700">Subjects</div>
+              <div className="font-bold text-center text-purple-700 text-sm">Subjects</div>
             </div>
             {weeks.map(week => (
               <div key={week} className={cn("text-center p-1 sm:p-2 lg:p-3 bg-white rounded-lg shadow-sm border-2",
@@ -203,11 +202,17 @@ export default function Index() {
             {subjects.map((subject) => (
               <div key={subject.id} className="contents">
                 {/* Subject Header */}
-                <div className="sticky left-0 bg-white z-10 p-1 sm:p-2 lg:p-3 border-2 rounded-lg shadow-md">
-                  <div className={cn("w-full h-16 sm:h-20 lg:h-24 rounded-lg flex flex-col items-center justify-center text-white font-bold", subject.color)}>
-                    <div className="text-xl sm:text-2xl lg:text-3xl mb-1">{subject.icon}</div>
-                    <div className="text-xs sm:text-sm text-center font-bold leading-tight">{subject.name}</div>
-                    <div className="text-xs text-center opacity-90 mt-1 hidden sm:block">
+                <div className="sticky left-0 bg-white z-10 p-2 border-2 rounded-lg shadow-md">
+                  <div className={cn("w-full h-20 rounded-lg flex flex-col items-center justify-center font-bold relative",
+                    subject.id === 'english' ? 'bg-green-500 text-white' :
+                    subject.id === 'art' ? 'bg-pink-500 text-white' :
+                    subject.id === 'pe' ? 'bg-orange-500 text-white' :
+                    subject.id === 'music' ? 'bg-yellow-500 text-gray-800' :
+                    subject.color + ' text-white'
+                  )}>
+                    <div className="text-2xl mb-1">{subject.icon}</div>
+                    <div className="text-xs text-center font-bold leading-tight px-1">{subject.name}</div>
+                    <div className="text-xs text-center opacity-90 mt-1">
                       36 Lessons
                     </div>
                   </div>
