@@ -10,7 +10,7 @@ export const subjects: Subject[] = [
 ];
 
 export const teachers: Teacher[] = [
-  { id: '1', name: 'Ahmed El-Agamy', username: 'ahmed.elagamy', password: '12345678', subjects: ['math', 'science'] },
+  { id: '1', name: 'Ahmed El-Agamy', username: 'ahmed.elagamy', password: '+201015323048', subjects: ['math', 'science'] },
   { id: '2', name: 'Sarah Johnson', username: 'sarah.johnson', password: 'password123', subjects: ['english', 'art'] },
   { id: '3', name: 'Mike Chen', username: 'mike.chen', password: 'password123', subjects: ['pe', 'music'] }
 ];
