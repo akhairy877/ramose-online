@@ -260,6 +260,41 @@ export const updateStudentCareerGoal = (studentId: string, newGoal: string): boo
   return true;
 };
 
+// Function to update milestone career relevance
+export const updateMilestoneCareerRelevance = (studentId: string, milestoneId: string, newRelevance: string): boolean => {
+  const student = globalVisionBoardData.students.find(s => s.id === studentId);
+  if (!student) return false;
+
+  const milestone = student.milestones.find(m => m.id === milestoneId);
+  if (!milestone) return false;
+
+  milestone.careerRelevance = newRelevance;
+  return true;
+};
+
+// Function to update milestone max attempts
+export const updateMilestoneMaxAttempts = (studentId: string, milestoneId: string, newMaxAttempts: number): boolean => {
+  const student = globalVisionBoardData.students.find(s => s.id === studentId);
+  if (!student) return false;
+
+  const milestone = student.milestones.find(m => m.id === milestoneId);
+  if (!milestone) return false;
+
+  // Validate max attempts (should be between 1 and 5)
+  if (newMaxAttempts < 1 || newMaxAttempts > 5) return false;
+
+  milestone.maxAttempts = newMaxAttempts;
+
+  // If current attempts exceed new max, update status
+  if (milestone.quizAttempts.length >= newMaxAttempts && !milestone.quizAttempts.some(a => a.passed)) {
+    milestone.status = 'failed-permanent';
+  } else if (milestone.quizAttempts.length < newMaxAttempts && milestone.status === 'failed-permanent') {
+    milestone.status = 'failed-retryable';
+  }
+
+  return true;
+};
+
 // Function to get current data (for React components to re-render)
 export const getCurrentVisionBoardData = (): VisionBoardData => {
   return { ...globalVisionBoardData };
