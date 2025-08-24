@@ -102,6 +102,34 @@ export default function TeacherDashboard() {
     }
   };
 
+  const handleCareerRelevanceUpdate = (studentId: string, milestoneId: string, newRelevance: string) => {
+    const success = updateMilestoneCareerRelevance(studentId, milestoneId, newRelevance);
+
+    if (success) {
+      setFeedbackMessage('Career relevance updated successfully');
+      refreshData();
+
+      // Clear feedback after 3 seconds
+      setTimeout(() => setFeedbackMessage(''), 3000);
+    } else {
+      setFeedbackMessage('Failed to update career relevance');
+    }
+  };
+
+  const handleMaxAttemptsUpdate = (studentId: string, milestoneId: string, newMaxAttempts: number) => {
+    const success = updateMilestoneMaxAttempts(studentId, milestoneId, newMaxAttempts);
+
+    if (success) {
+      setFeedbackMessage(`Max attempts updated to ${newMaxAttempts}`);
+      refreshData();
+
+      // Clear feedback after 3 seconds
+      setTimeout(() => setFeedbackMessage(''), 3000);
+    } else {
+      setFeedbackMessage('Failed to update max attempts (must be between 1-5)');
+    }
+  };
+
   if (!currentTeacher) {
     return <div>Loading...</div>;
   }
