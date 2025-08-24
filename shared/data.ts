@@ -1,39 +1,115 @@
-import { VisionBoardData, Student, Subject, Teacher, Milestone, QuizAttempt } from './types';
+import {
+  VisionBoardData,
+  Student,
+  Subject,
+  Teacher,
+  Milestone,
+  QuizAttempt,
+} from "./types";
 
 export const subjects: Subject[] = [
-  { id: 'math', name: 'Mathematics', color: 'bg-blue-500 hover:bg-blue-600', icon: '🔢' },
-  { id: 'english', name: 'English', color: 'bg-green-500 hover:bg-green-600', icon: '📚' },
-  { id: 'science', name: 'Science', color: 'bg-purple-500 hover:bg-purple-600', icon: '🔬' },
-  { id: 'art', name: 'Art', color: 'bg-pink-500 hover:bg-pink-600', icon: '🎨' },
-  { id: 'pe', name: 'Physical Education', color: 'bg-orange-500 hover:bg-orange-600', icon: '⚽' },
-  { id: 'music', name: 'Music', color: 'bg-yellow-500 hover:bg-yellow-600', icon: '🎵' }
+  {
+    id: "math",
+    name: "Mathematics",
+    color: "bg-blue-500 hover:bg-blue-600",
+    icon: "🔢",
+  },
+  {
+    id: "english",
+    name: "English",
+    color: "bg-green-500 hover:bg-green-600",
+    icon: "📚",
+  },
+  {
+    id: "science",
+    name: "Science",
+    color: "bg-purple-500 hover:bg-purple-600",
+    icon: "🔬",
+  },
+  {
+    id: "art",
+    name: "Art",
+    color: "bg-pink-500 hover:bg-pink-600",
+    icon: "🎨",
+  },
+  {
+    id: "pe",
+    name: "Physical Education",
+    color: "bg-orange-500 hover:bg-orange-600",
+    icon: "⚽",
+  },
+  {
+    id: "music",
+    name: "Music",
+    color: "bg-yellow-500 hover:bg-yellow-600",
+    icon: "🎵",
+  },
 ];
 
 export const teachers: Teacher[] = [
-  { id: '1', name: 'Ahmed El-Agamy', username: 'ahmed.elagamy', password: '+201015323048', subjects: ['math', 'science'] },
-  { id: '2', name: 'Sarah Johnson', username: 'sarah.johnson', password: 'password123', subjects: ['english', 'art'] },
-  { id: '3', name: 'Mike Chen', username: 'mike.chen', password: 'password123', subjects: ['pe', 'music'] }
+  {
+    id: "1",
+    name: "Ahmed El-Agamy",
+    username: "ahmed.elagamy",
+    password: "+201015323048",
+    subjects: ["math", "science"],
+  },
+  {
+    id: "2",
+    name: "Sarah Johnson",
+    username: "sarah.johnson",
+    password: "password123",
+    subjects: ["english", "art"],
+  },
+  {
+    id: "3",
+    name: "Mike Chen",
+    username: "mike.chen",
+    password: "password123",
+    subjects: ["pe", "music"],
+  },
 ];
 
 const careerGoals = [
-  'Doctor', 'Engineer', 'Teacher', 'Artist', 'Scientist', 'Musician', 'Athlete', 'Writer',
-  'Chef', 'Pilot', 'Veterinarian', 'Firefighter', 'Police Officer', 'Nurse', 'Architect'
+  "Doctor",
+  "Engineer",
+  "Teacher",
+  "Artist",
+  "Scientist",
+  "Musician",
+  "Athlete",
+  "Writer",
+  "Chef",
+  "Pilot",
+  "Veterinarian",
+  "Firefighter",
+  "Police Officer",
+  "Nurse",
+  "Architect",
 ];
 
 const avatarColors = [
-  'bg-red-200', 'bg-blue-200', 'bg-green-200', 'bg-yellow-200', 'bg-purple-200',
-  'bg-pink-200', 'bg-indigo-200', 'bg-gray-200', 'bg-orange-200', 'bg-teal-200'
+  "bg-red-200",
+  "bg-blue-200",
+  "bg-green-200",
+  "bg-yellow-200",
+  "bg-purple-200",
+  "bg-pink-200",
+  "bg-indigo-200",
+  "bg-gray-200",
+  "bg-orange-200",
+  "bg-teal-200",
 ];
 
 const generateMilestones = (studentId: string): Milestone[] => {
   const milestones: Milestone[] = [];
   const currentWeek = 12; // Current week from visionBoardData
 
-  subjects.forEach(subject => {
+  subjects.forEach((subject) => {
     for (let week = 1; week <= 36; week++) {
       const id = `${studentId}-${subject.id}-${week}`;
       let attempts: QuizAttempt[] = [];
-      let status: Milestone['status'] = 'not-started';
+      let status: Milestone["status"] = "not-started";
 
       if (week < currentWeek) {
         // Past weeks - MUST have either passed or failed (3 attempts)
@@ -41,13 +117,14 @@ const generateMilestones = (studentId: string): Milestone[] => {
 
         if (shouldPass) {
           // Generate passing attempts (1-2 attempts usually)
-          const numAttempts = Math.random() > 0.6 ? 1 : Math.random() > 0.8 ? 2 : 3;
+          const numAttempts =
+            Math.random() > 0.6 ? 1 : Math.random() > 0.8 ? 2 : 3;
           attempts = generatePassingAttempts(numAttempts);
-          status = 'passed';
+          status = "passed";
         } else {
           // Generate 3 failing attempts
           attempts = generateFailingAttempts();
-          status = 'failed-permanent';
+          status = "failed-permanent";
         }
       } else if (week === currentWeek) {
         // Current week - may be in progress, passed, or failed
@@ -56,12 +133,12 @@ const generateMilestones = (studentId: string): Milestone[] => {
           attempts = generateAttempts();
           status = getStatusFromAttempts(attempts, true);
         } else {
-          status = 'in-progress';
+          status = "in-progress";
         }
       } else {
         // Future weeks - not started
         attempts = [];
-        status = 'not-started';
+        status = "not-started";
       }
 
       milestones.push({
@@ -73,7 +150,7 @@ const generateMilestones = (studentId: string): Milestone[] => {
         status,
         quizAttempts: attempts,
         points: calculatePoints(attempts),
-        maxAttempts: 3
+        maxAttempts: 3,
       });
     }
   });
@@ -91,7 +168,7 @@ const generateAttempts = (): QuizAttempt[] => {
       attempt: i,
       grade,
       passed: grade >= 50,
-      date: new Date(2024, 0, (Math.random() * 365)).toISOString()
+      date: new Date(2024, 0, Math.random() * 365).toISOString(),
     });
 
     if (grade >= 50) break; // Stop if passed
@@ -113,7 +190,7 @@ const generatePassingAttempts = (maxAttempts: number): QuizAttempt[] => {
       attempt: i,
       grade,
       passed: grade >= 50,
-      date: new Date(2024, 0, (Math.random() * 365)).toISOString()
+      date: new Date(2024, 0, Math.random() * 365).toISOString(),
     });
 
     if (grade >= 50) break; // Stop if passed
@@ -132,31 +209,34 @@ const generateFailingAttempts = (): QuizAttempt[] => {
       attempt: i,
       grade,
       passed: false,
-      date: new Date(2024, 0, (Math.random() * 365)).toISOString()
+      date: new Date(2024, 0, Math.random() * 365).toISOString(),
     });
   }
 
   return attempts;
 };
 
-const getStatusFromAttempts = (attempts: QuizAttempt[], isCurrentOrPast: boolean = false): Milestone['status'] => {
+const getStatusFromAttempts = (
+  attempts: QuizAttempt[],
+  isCurrentOrPast: boolean = false,
+): Milestone["status"] => {
   if (attempts.length === 0) {
-    return isCurrentOrPast ? 'not-started' : 'not-started';
+    return isCurrentOrPast ? "not-started" : "not-started";
   }
 
   const lastAttempt = attempts[attempts.length - 1];
-  if (lastAttempt.passed) return 'passed';
+  if (lastAttempt.passed) return "passed";
 
-  if (attempts.length >= 3) return 'failed-permanent';
-  return 'failed-retryable';
+  if (attempts.length >= 3) return "failed-permanent";
+  return "failed-retryable";
 };
 
 const calculatePoints = (attempts: QuizAttempt[]): number => {
   if (attempts.length === 0) return 0;
-  
+
   const lastAttempt = attempts[attempts.length - 1];
   if (!lastAttempt.passed) return 0;
-  
+
   // More points for fewer attempts
   const basePoints = lastAttempt.grade;
   const attemptPenalty = (attempts.length - 1) * 10;
@@ -165,34 +245,40 @@ const calculatePoints = (attempts: QuizAttempt[]): number => {
 
 const getCareerRelevance = (subject: string): string => {
   const relevanceMap: Record<string, string> = {
-    'Mathematics': 'Builds logical thinking and problem-solving skills essential for any career',
-    'English': 'Develops communication skills crucial for expressing ideas and collaborating',
-    'Science': 'Fosters curiosity and analytical thinking for understanding the world',
-    'Art': 'Enhances creativity and visual communication abilities',
-    'Physical Education': 'Promotes teamwork, discipline, and healthy lifestyle habits',
-    'Music': 'Develops rhythm, coordination, and emotional expression'
+    Mathematics:
+      "Builds logical thinking and problem-solving skills essential for any career",
+    English:
+      "Develops communication skills crucial for expressing ideas and collaborating",
+    Science:
+      "Fosters curiosity and analytical thinking for understanding the world",
+    Art: "Enhances creativity and visual communication abilities",
+    "Physical Education":
+      "Promotes teamwork, discipline, and healthy lifestyle habits",
+    Music: "Develops rhythm, coordination, and emotional expression",
   };
-  return relevanceMap[subject] || 'Contributes to well-rounded personal development';
+  return (
+    relevanceMap[subject] || "Contributes to well-rounded personal development"
+  );
 };
 
 const generateStudents = (): Student[] => {
   const students: Student[] = [];
-  
+
   for (let i = 1; i <= 50; i++) {
     const id = `student-${i}`;
     const milestones = generateMilestones(id);
     const totalPoints = milestones.reduce((sum, m) => sum + m.points, 0);
-    
+
     students.push({
       id,
       name: `Student ${i}`,
       careerGoal: careerGoals[Math.floor(Math.random() * careerGoals.length)],
       avatar: avatarColors[i % avatarColors.length],
       totalPoints,
-      milestones
+      milestones,
     });
   }
-  
+
   return students;
 };
 
@@ -202,43 +288,57 @@ let globalVisionBoardData: VisionBoardData = {
   subjects,
   teachers,
   currentWeek: 12,
-  totalWeeks: 36
+  totalWeeks: 36,
 };
 
 // Force data regeneration for debugging
-console.log('Generated students:', globalVisionBoardData.students.length);
-console.log('Available subjects:', globalVisionBoardData.subjects);
-console.log('Sample student milestones:', globalVisionBoardData.students[0]?.milestones?.slice(0, 3));
+console.log("Generated students:", globalVisionBoardData.students.length);
+console.log("Available subjects:", globalVisionBoardData.subjects);
+console.log(
+  "Sample student milestones:",
+  globalVisionBoardData.students[0]?.milestones?.slice(0, 3),
+);
 
 export const visionBoardData: VisionBoardData = globalVisionBoardData;
 
 // Function to update milestone status
-export const updateMilestoneStatus = (studentId: string, milestoneId: string, newStatus: Milestone['status']): boolean => {
-  const student = globalVisionBoardData.students.find(s => s.id === studentId);
+export const updateMilestoneStatus = (
+  studentId: string,
+  milestoneId: string,
+  newStatus: Milestone["status"],
+): boolean => {
+  const student = globalVisionBoardData.students.find(
+    (s) => s.id === studentId,
+  );
   if (!student) return false;
 
-  const milestone = student.milestones.find(m => m.id === milestoneId);
+  const milestone = student.milestones.find((m) => m.id === milestoneId);
   if (!milestone) return false;
 
   milestone.status = newStatus;
 
   // Recalculate points based on new status
-  if (newStatus === 'passed' && milestone.quizAttempts.length === 0) {
+  if (newStatus === "passed" && milestone.quizAttempts.length === 0) {
     // If marking as passed but no attempts exist, create a passing attempt
-    milestone.quizAttempts = [{
-      attempt: 1,
-      grade: 85,
-      passed: true,
-      date: new Date().toISOString()
-    }];
-  } else if (newStatus === 'failed-permanent' && milestone.quizAttempts.length < 3) {
+    milestone.quizAttempts = [
+      {
+        attempt: 1,
+        grade: 85,
+        passed: true,
+        date: new Date().toISOString(),
+      },
+    ];
+  } else if (
+    newStatus === "failed-permanent" &&
+    milestone.quizAttempts.length < 3
+  ) {
     // If marking as permanently failed, ensure 3 attempts exist
     while (milestone.quizAttempts.length < 3) {
       milestone.quizAttempts.push({
         attempt: milestone.quizAttempts.length + 1,
         grade: Math.floor(Math.random() * 50),
         passed: false,
-        date: new Date().toISOString()
+        date: new Date().toISOString(),
       });
     }
   }
@@ -246,14 +346,22 @@ export const updateMilestoneStatus = (studentId: string, milestoneId: string, ne
   milestone.points = calculatePoints(milestone.quizAttempts);
 
   // Recalculate student's total points
-  student.totalPoints = student.milestones.reduce((sum, m) => sum + m.points, 0);
+  student.totalPoints = student.milestones.reduce(
+    (sum, m) => sum + m.points,
+    0,
+  );
 
   return true;
 };
 
 // Function to update student career goal
-export const updateStudentCareerGoal = (studentId: string, newGoal: string): boolean => {
-  const student = globalVisionBoardData.students.find(s => s.id === studentId);
+export const updateStudentCareerGoal = (
+  studentId: string,
+  newGoal: string,
+): boolean => {
+  const student = globalVisionBoardData.students.find(
+    (s) => s.id === studentId,
+  );
   if (!student) return false;
 
   student.careerGoal = newGoal;
@@ -261,11 +369,17 @@ export const updateStudentCareerGoal = (studentId: string, newGoal: string): boo
 };
 
 // Function to update milestone career relevance
-export const updateMilestoneCareerRelevance = (studentId: string, milestoneId: string, newRelevance: string): boolean => {
-  const student = globalVisionBoardData.students.find(s => s.id === studentId);
+export const updateMilestoneCareerRelevance = (
+  studentId: string,
+  milestoneId: string,
+  newRelevance: string,
+): boolean => {
+  const student = globalVisionBoardData.students.find(
+    (s) => s.id === studentId,
+  );
   if (!student) return false;
 
-  const milestone = student.milestones.find(m => m.id === milestoneId);
+  const milestone = student.milestones.find((m) => m.id === milestoneId);
   if (!milestone) return false;
 
   milestone.careerRelevance = newRelevance;
@@ -273,11 +387,17 @@ export const updateMilestoneCareerRelevance = (studentId: string, milestoneId: s
 };
 
 // Function to update milestone used attempts
-export const updateMilestoneUsedAttempts = (studentId: string, milestoneId: string, newUsedAttempts: number): boolean => {
-  const student = globalVisionBoardData.students.find(s => s.id === studentId);
+export const updateMilestoneUsedAttempts = (
+  studentId: string,
+  milestoneId: string,
+  newUsedAttempts: number,
+): boolean => {
+  const student = globalVisionBoardData.students.find(
+    (s) => s.id === studentId,
+  );
   if (!student) return false;
 
-  const milestone = student.milestones.find(m => m.id === milestoneId);
+  const milestone = student.milestones.find((m) => m.id === milestoneId);
   if (!milestone) return false;
 
   // Validate used attempts (should be between 0 and 3)
@@ -293,7 +413,7 @@ export const updateMilestoneUsedAttempts = (studentId: string, milestoneId: stri
         attempt: i + 1,
         grade: Math.floor(Math.random() * 50), // Failing grade (0-59)
         passed: false,
-        date: new Date().toISOString()
+        date: new Date().toISOString(),
       });
     }
   } else if (newUsedAttempts < currentAttempts) {
@@ -303,34 +423,45 @@ export const updateMilestoneUsedAttempts = (studentId: string, milestoneId: stri
 
   // Update status based on new attempts
   if (newUsedAttempts === 0) {
-    milestone.status = 'not-started';
-  } else if (milestone.quizAttempts.some(a => a.passed)) {
-    milestone.status = 'passed';
+    milestone.status = "not-started";
+  } else if (milestone.quizAttempts.some((a) => a.passed)) {
+    milestone.status = "passed";
   } else if (newUsedAttempts >= 3) {
-    milestone.status = 'failed-permanent';
+    milestone.status = "failed-permanent";
   } else {
-    milestone.status = 'failed-retryable';
+    milestone.status = "failed-retryable";
   }
 
   // Recalculate points
   milestone.points = calculatePoints(milestone.quizAttempts);
 
   // Recalculate student's total points
-  student.totalPoints = student.milestones.reduce((sum, m) => sum + m.points, 0);
+  student.totalPoints = student.milestones.reduce(
+    (sum, m) => sum + m.points,
+    0,
+  );
 
   return true;
 };
 
-
 // Function to update quiz attempt score
-export const updateQuizAttemptScore = (studentId: string, milestoneId: string, attemptNumber: number, newScore: number): boolean => {
-  const student = globalVisionBoardData.students.find(s => s.id === studentId);
+export const updateQuizAttemptScore = (
+  studentId: string,
+  milestoneId: string,
+  attemptNumber: number,
+  newScore: number,
+): boolean => {
+  const student = globalVisionBoardData.students.find(
+    (s) => s.id === studentId,
+  );
   if (!student) return false;
 
-  const milestone = student.milestones.find(m => m.id === milestoneId);
+  const milestone = student.milestones.find((m) => m.id === milestoneId);
   if (!milestone) return false;
 
-  const attempt = milestone.quizAttempts.find(a => a.attempt === attemptNumber);
+  const attempt = milestone.quizAttempts.find(
+    (a) => a.attempt === attemptNumber,
+  );
   if (!attempt) return false;
 
   // Validate score (should be between 0 and 100)
@@ -341,19 +472,22 @@ export const updateQuizAttemptScore = (studentId: string, milestoneId: string, a
   attempt.passed = newScore >= 50;
 
   // Update milestone status based on attempts
-  if (milestone.quizAttempts.some(a => a.passed)) {
-    milestone.status = 'passed';
+  if (milestone.quizAttempts.some((a) => a.passed)) {
+    milestone.status = "passed";
   } else if (milestone.quizAttempts.length >= 3) {
-    milestone.status = 'failed-permanent';
+    milestone.status = "failed-permanent";
   } else {
-    milestone.status = 'failed-retryable';
+    milestone.status = "failed-retryable";
   }
 
   // Recalculate points
   milestone.points = calculatePoints(milestone.quizAttempts);
 
   // Recalculate student's total points
-  student.totalPoints = student.milestones.reduce((sum, m) => sum + m.points, 0);
+  student.totalPoints = student.milestones.reduce(
+    (sum, m) => sum + m.points,
+    0,
+  );
 
   return true;
 };

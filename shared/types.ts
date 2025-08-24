@@ -11,7 +11,12 @@ export interface Milestone {
   week: number;
   subject: string;
   careerRelevance: string;
-  status: 'not-started' | 'in-progress' | 'passed' | 'failed-retryable' | 'failed-permanent';
+  status:
+    | "not-started"
+    | "in-progress"
+    | "passed"
+    | "failed-retryable"
+    | "failed-permanent";
   quizAttempts: QuizAttempt[];
   points: number;
   maxAttempts: number;
