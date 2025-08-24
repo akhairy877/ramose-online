@@ -303,27 +303,18 @@ export default function TeacherDashboard() {
                           />
                         </div>
 
-                        {/* Max Attempts */}
+                        {/* Used Attempts */}
                         <div className="mb-3">
-                          <Label className="text-xs font-medium text-blue-700 mb-1 block">Max Attempts</Label>
+                          <Label className="text-xs font-medium text-blue-700 mb-1 block">Used Attempts</Label>
                           <div className="flex items-center gap-2">
-                            <Input
-                              type="number"
-                              min="1"
-                              max="5"
-                              defaultValue={milestone.maxAttempts}
-                              className="w-20 text-xs border-blue-200"
-                              onBlur={(e) => {
-                                const value = parseInt(e.target.value);
-                                if (value >= 1 && value <= 5) {
-                                  handleMaxAttemptsUpdate(selectedStudent.id, milestone.id, value);
-                                }
-                              }}
-                            />
-                            <span className="text-xs text-gray-500">max attempts</span>
-                            <Badge className="bg-blue-100 text-blue-800 text-xs">
-                              {milestone.quizAttempts.length}/{milestone.maxAttempts} used
+                            <Badge className="bg-blue-100 text-blue-800 text-sm px-3 py-1">
+                              {milestone.quizAttempts.length} / 3 attempts used
                             </Badge>
+                            {milestone.quizAttempts.length >= 3 && !milestone.quizAttempts.some(a => a.passed) && (
+                              <Badge className="bg-red-100 text-red-800 text-xs">
+                                Max reached
+                              </Badge>
+                            )}
                           </div>
                         </div>
 
