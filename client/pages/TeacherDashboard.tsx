@@ -333,7 +333,10 @@ export default function TeacherDashboard() {
                                 }
                               }}
                             />
-                            <span className="text-xs text-gray-500">attempts (1-5)</span>
+                            <span className="text-xs text-gray-500">max attempts</span>
+                            <Badge className="bg-blue-100 text-blue-800 text-xs">
+                              {milestone.quizAttempts.length}/{milestone.maxAttempts} used
+                            </Badge>
                           </div>
                         </div>
 
