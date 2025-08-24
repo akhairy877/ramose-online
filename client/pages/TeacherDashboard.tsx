@@ -357,6 +357,49 @@ export default function TeacherDashboard() {
                           </div>
                         </div>
 
+                        {/* Quiz Attempts Scores */}
+                        {milestone.quizAttempts.length > 0 && (
+                          <div className="mb-3">
+                            <Label className="text-xs font-medium text-green-700 mb-2 block">Quiz Attempts & Scores</Label>
+                            <div className="space-y-2">
+                              {milestone.quizAttempts.map((attempt) => (
+                                <div key={attempt.attempt} className="flex items-center gap-3 p-2 bg-gray-50 rounded border">
+                                  <div className="flex items-center gap-2">
+                                    <Badge className="bg-gray-200 text-gray-800 text-xs">
+                                      Attempt {attempt.attempt}
+                                    </Badge>
+                                    <span className="text-xs text-gray-500">
+                                      {new Date(attempt.date).toLocaleDateString()}
+                                    </span>
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <Input
+                                      type="number"
+                                      min="0"
+                                      max="100"
+                                      defaultValue={attempt.grade}
+                                      className="w-16 text-xs border-green-200"
+                                      onBlur={(e) => {
+                                        const value = parseInt(e.target.value);
+                                        if (value >= 0 && value <= 100) {
+                                          handleQuizScoreUpdate(selectedStudent.id, milestone.id, attempt.attempt, value);
+                                        }
+                                      }}
+                                    />
+                                    <span className="text-xs text-gray-500">%</span>
+                                    <Badge className={cn(
+                                      "text-xs",
+                                      attempt.passed ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
+                                    )}>
+                                      {attempt.passed ? "✅ Pass" : "❌ Fail"}
+                                    </Badge>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
                         {/* Status Buttons */}
                         <div className="flex gap-1 flex-wrap">
                           {['not-started', 'in-progress', 'passed', 'failed-retryable', 'failed-permanent'].map(status => (
