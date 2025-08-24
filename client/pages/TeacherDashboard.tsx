@@ -283,12 +283,13 @@ export default function TeacherDashboard() {
                     {selectedStudent.name} - {subjects.find(s => s.id === selectedSubject)?.name}
                   </div>
                   
-                  <div className="space-y-2 max-h-60 overflow-y-auto">
+                  <div className="space-y-4 max-h-96 overflow-y-auto">
                     {getMilestonesForStudentAndSubject(selectedStudent.id, selectedSubject)
-                      .slice(0, 12) // Show first 12 weeks
+                      .slice(0, 8) // Show first 8 weeks for better UX
                       .map(milestone => (
-                      <div key={milestone.id} className="p-3 border rounded-lg bg-white">
-                        <div className="flex items-center justify-between mb-2">
+                      <Card key={milestone.id} className="p-4 border rounded-lg bg-white shadow-sm">
+                        {/* Header */}
+                        <div className="flex items-center justify-between mb-3">
                           <div className="text-sm font-medium">Week {milestone.week}</div>
                           <Badge className={cn(
                             "text-xs",
@@ -300,8 +301,44 @@ export default function TeacherDashboard() {
                             {milestone.status.replace('-', ' ')}
                           </Badge>
                         </div>
-                        <div className="text-xs text-gray-600 mb-2">{milestone.lessonTitle}</div>
-                        <div className="flex gap-1">
+
+                        {/* Lesson Title */}
+                        <div className="text-xs text-gray-600 mb-3 font-medium">{milestone.lessonTitle}</div>
+
+                        {/* Career Relevance */}
+                        <div className="mb-3">
+                          <Label className="text-xs font-medium text-purple-700 mb-1 block">Career Relevance</Label>
+                          <Textarea
+                            defaultValue={milestone.careerRelevance}
+                            className="text-xs min-h-[60px] border-purple-200"
+                            placeholder="Explain how this lesson relates to career goals..."
+                            onBlur={(e) => handleCareerRelevanceUpdate(selectedStudent.id, milestone.id, e.target.value)}
+                          />
+                        </div>
+
+                        {/* Max Attempts */}
+                        <div className="mb-3">
+                          <Label className="text-xs font-medium text-blue-700 mb-1 block">Max Attempts</Label>
+                          <div className="flex items-center gap-2">
+                            <Input
+                              type="number"
+                              min="1"
+                              max="5"
+                              defaultValue={milestone.maxAttempts}
+                              className="w-20 text-xs border-blue-200"
+                              onBlur={(e) => {
+                                const value = parseInt(e.target.value);
+                                if (value >= 1 && value <= 5) {
+                                  handleMaxAttemptsUpdate(selectedStudent.id, milestone.id, value);
+                                }
+                              }}
+                            />
+                            <span className="text-xs text-gray-500">attempts (1-5)</span>
+                          </div>
+                        </div>
+
+                        {/* Status Buttons */}
+                        <div className="flex gap-1 flex-wrap">
                           {['not-started', 'in-progress', 'passed', 'failed-retryable', 'failed-permanent'].map(status => (
                             <Button
                               key={status}
@@ -318,7 +355,7 @@ export default function TeacherDashboard() {
                             </Button>
                           ))}
                         </div>
-                      </div>
+                      </Card>
                     ))}
                   </div>
                 </div>
