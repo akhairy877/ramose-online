@@ -116,6 +116,20 @@ export default function TeacherDashboard() {
     }
   };
 
+  const handleUsedAttemptsUpdate = (studentId: string, milestoneId: string, newUsedAttempts: number) => {
+    const success = updateMilestoneUsedAttempts(studentId, milestoneId, newUsedAttempts);
+
+    if (success) {
+      setFeedbackMessage(`Used attempts updated to ${newUsedAttempts}`);
+      refreshData();
+
+      // Clear feedback after 3 seconds
+      setTimeout(() => setFeedbackMessage(''), 3000);
+    } else {
+      setFeedbackMessage('Failed to update used attempts (must be between 0-3)');
+    }
+  };
+
 
   if (!currentTeacher) {
     return <div>Loading...</div>;
