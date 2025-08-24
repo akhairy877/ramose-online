@@ -272,6 +272,55 @@ export const updateMilestoneCareerRelevance = (studentId: string, milestoneId: s
   return true;
 };
 
+// Function to update milestone used attempts
+export const updateMilestoneUsedAttempts = (studentId: string, milestoneId: string, newUsedAttempts: number): boolean => {
+  const student = globalVisionBoardData.students.find(s => s.id === studentId);
+  if (!student) return false;
+
+  const milestone = student.milestones.find(m => m.id === milestoneId);
+  if (!milestone) return false;
+
+  // Validate used attempts (should be between 0 and 3)
+  if (newUsedAttempts < 0 || newUsedAttempts > 3) return false;
+
+  // Adjust quiz attempts array to match the new count
+  const currentAttempts = milestone.quizAttempts.length;
+
+  if (newUsedAttempts > currentAttempts) {
+    // Add attempts (failing attempts by default)
+    for (let i = currentAttempts; i < newUsedAttempts; i++) {
+      milestone.quizAttempts.push({
+        attempt: i + 1,
+        grade: Math.floor(Math.random() * 60), // Failing grade (0-59)
+        passed: false,
+        date: new Date().toISOString()
+      });
+    }
+  } else if (newUsedAttempts < currentAttempts) {
+    // Remove attempts from the end
+    milestone.quizAttempts = milestone.quizAttempts.slice(0, newUsedAttempts);
+  }
+
+  // Update status based on new attempts
+  if (newUsedAttempts === 0) {
+    milestone.status = 'not-started';
+  } else if (milestone.quizAttempts.some(a => a.passed)) {
+    milestone.status = 'passed';
+  } else if (newUsedAttempts >= 3) {
+    milestone.status = 'failed-permanent';
+  } else {
+    milestone.status = 'failed-retryable';
+  }
+
+  // Recalculate points
+  milestone.points = calculatePoints(milestone.quizAttempts);
+
+  // Recalculate student's total points
+  student.totalPoints = student.milestones.reduce((sum, m) => sum + m.points, 0);
+
+  return true;
+};
+
 
 // Function to get current data (for React components to re-render)
 export const getCurrentVisionBoardData = (): VisionBoardData => {
