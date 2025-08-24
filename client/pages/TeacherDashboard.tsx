@@ -130,6 +130,20 @@ export default function TeacherDashboard() {
     }
   };
 
+  const handleQuizScoreUpdate = (studentId: string, milestoneId: string, attemptNumber: number, newScore: number) => {
+    const success = updateQuizAttemptScore(studentId, milestoneId, attemptNumber, newScore);
+
+    if (success) {
+      setFeedbackMessage(`Quiz score updated to ${newScore}%`);
+      refreshData();
+
+      // Clear feedback after 3 seconds
+      setTimeout(() => setFeedbackMessage(''), 3000);
+    } else {
+      setFeedbackMessage('Failed to update quiz score (must be between 0-100)');
+    }
+  };
+
 
   if (!currentTeacher) {
     return <div>Loading...</div>;
