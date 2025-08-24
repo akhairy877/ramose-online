@@ -116,19 +116,6 @@ export default function TeacherDashboard() {
     }
   };
 
-  const handleMaxAttemptsUpdate = (studentId: string, milestoneId: string, newMaxAttempts: number) => {
-    const success = updateMilestoneMaxAttempts(studentId, milestoneId, newMaxAttempts);
-
-    if (success) {
-      setFeedbackMessage(`Max attempts updated to ${newMaxAttempts}`);
-      refreshData();
-
-      // Clear feedback after 3 seconds
-      setTimeout(() => setFeedbackMessage(''), 3000);
-    } else {
-      setFeedbackMessage('Failed to update max attempts (must be between 1-5)');
-    }
-  };
 
   if (!currentTeacher) {
     return <div>Loading...</div>;
