@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { visionBoardData, subjects, updateMilestoneStatus, updateStudentCareerGoal, updateMilestoneCareerRelevance, getCurrentVisionBoardData } from '@shared/data';
+import { visionBoardData, subjects, updateMilestoneStatus, updateStudentCareerGoal, updateMilestoneCareerRelevance, updateMilestoneUsedAttempts, getCurrentVisionBoardData } from '@shared/data';
 import { Teacher, Student, Milestone } from '@shared/types';
 import { cn } from '@/lib/utils';
 
