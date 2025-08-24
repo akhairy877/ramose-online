@@ -14,7 +14,7 @@ export interface Milestone {
   status: 'not-started' | 'in-progress' | 'passed' | 'failed-retryable' | 'failed-permanent';
   quizAttempts: QuizAttempt[];
   points: number;
-  maxAttempts: 3;
+  maxAttempts: number;
 }
 
 export interface Student {
