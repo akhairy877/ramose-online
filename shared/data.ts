@@ -322,6 +322,42 @@ export const updateMilestoneUsedAttempts = (studentId: string, milestoneId: stri
 };
 
 
+// Function to update quiz attempt score
+export const updateQuizAttemptScore = (studentId: string, milestoneId: string, attemptNumber: number, newScore: number): boolean => {
+  const student = globalVisionBoardData.students.find(s => s.id === studentId);
+  if (!student) return false;
+
+  const milestone = student.milestones.find(m => m.id === milestoneId);
+  if (!milestone) return false;
+
+  const attempt = milestone.quizAttempts.find(a => a.attempt === attemptNumber);
+  if (!attempt) return false;
+
+  // Validate score (should be between 0 and 100)
+  if (newScore < 0 || newScore > 100) return false;
+
+  // Update score and passed status
+  attempt.grade = newScore;
+  attempt.passed = newScore >= 60;
+
+  // Update milestone status based on attempts
+  if (milestone.quizAttempts.some(a => a.passed)) {
+    milestone.status = 'passed';
+  } else if (milestone.quizAttempts.length >= 3) {
+    milestone.status = 'failed-permanent';
+  } else {
+    milestone.status = 'failed-retryable';
+  }
+
+  // Recalculate points
+  milestone.points = calculatePoints(milestone.quizAttempts);
+
+  // Recalculate student's total points
+  student.totalPoints = student.milestones.reduce((sum, m) => sum + m.points, 0);
+
+  return true;
+};
+
 // Function to get current data (for React components to re-render)
 export const getCurrentVisionBoardData = (): VisionBoardData => {
   return { ...globalVisionBoardData };
