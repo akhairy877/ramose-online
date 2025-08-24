@@ -90,11 +90,11 @@ const generateAttempts = (): QuizAttempt[] => {
     attempts.push({
       attempt: i,
       grade,
-      passed: grade >= 60,
+      passed: grade >= 50,
       date: new Date(2024, 0, (Math.random() * 365)).toISOString()
     });
 
-    if (grade >= 60) break; // Stop if passed
+    if (grade >= 50) break; // Stop if passed
   }
 
   return attempts;
@@ -106,17 +106,17 @@ const generatePassingAttempts = (maxAttempts: number): QuizAttempt[] => {
   for (let i = 1; i <= maxAttempts; i++) {
     const isLastAttempt = i === maxAttempts;
     const grade = isLastAttempt
-      ? Math.floor(Math.random() * 41) + 60 // 60-100 for passing
+      ? Math.floor(Math.random() * 51) + 50 // 50-100 for passing
       : Math.floor(Math.random() * 101); // Any grade for non-final attempts
 
     attempts.push({
       attempt: i,
       grade,
-      passed: grade >= 60,
+      passed: grade >= 50,
       date: new Date(2024, 0, (Math.random() * 365)).toISOString()
     });
 
-    if (grade >= 60) break; // Stop if passed
+    if (grade >= 50) break; // Stop if passed
   }
 
   return attempts;
@@ -127,7 +127,7 @@ const generateFailingAttempts = (): QuizAttempt[] => {
 
   // Always generate exactly 3 failing attempts
   for (let i = 1; i <= 3; i++) {
-    const grade = Math.floor(Math.random() * 60); // 0-59 (failing grades)
+    const grade = Math.floor(Math.random() * 50); // 0-49 (failing grades)
     attempts.push({
       attempt: i,
       grade,
@@ -236,7 +236,7 @@ export const updateMilestoneStatus = (studentId: string, milestoneId: string, ne
     while (milestone.quizAttempts.length < 3) {
       milestone.quizAttempts.push({
         attempt: milestone.quizAttempts.length + 1,
-        grade: Math.floor(Math.random() * 60),
+        grade: Math.floor(Math.random() * 50),
         passed: false,
         date: new Date().toISOString()
       });
@@ -291,7 +291,7 @@ export const updateMilestoneUsedAttempts = (studentId: string, milestoneId: stri
     for (let i = currentAttempts; i < newUsedAttempts; i++) {
       milestone.quizAttempts.push({
         attempt: i + 1,
-        grade: Math.floor(Math.random() * 60), // Failing grade (0-59)
+        grade: Math.floor(Math.random() * 50), // Failing grade (0-59)
         passed: false,
         date: new Date().toISOString()
       });
@@ -338,7 +338,7 @@ export const updateQuizAttemptScore = (studentId: string, milestoneId: string, a
 
   // Update score and passed status
   attempt.grade = newScore;
-  attempt.passed = newScore >= 60;
+  attempt.passed = newScore >= 50;
 
   // Update milestone status based on attempts
   if (milestone.quizAttempts.some(a => a.passed)) {
