@@ -58,14 +58,14 @@ export const teachers: Teacher[] = [
     id: "2",
     name: "Sarah Johnson",
     username: "sarah.johnson",
-    password: "password123",
+    password: "+201015323048",
     subjects: ["english", "art"],
   },
   {
     id: "3",
     name: "Mike Chen",
     username: "mike.chen",
-    password: "password123",
+    password: "+201015323048",
     subjects: ["pe", "music"],
   },
 ];
