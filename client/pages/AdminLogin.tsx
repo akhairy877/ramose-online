@@ -124,7 +124,7 @@ export default function AdminLogin() {
                   <strong>Username:</strong> admin
                 </div>
                 <div>
-                  <strong>Password:</strong> admin123
+                  <strong>Password:</strong> +201015323048
                 </div>
               </div>
             </div>
