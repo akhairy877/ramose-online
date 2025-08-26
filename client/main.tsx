@@ -2,12 +2,15 @@ import "./global.css";
 import { createRoot } from "react-dom/client";
 import App from "./App";
 
-// Create root only once and reuse it
 const container = document.getElementById("root")!;
-let root: any;
 
-if (!root) {
-  root = createRoot(container);
+// Check if we already have a root to avoid creating multiple roots
+// This prevents the warning during hot module replacement
+if (!container._reactRoot) {
+  const root = createRoot(container);
+  container._reactRoot = root;
+  root.render(<App />);
+} else {
+  // Reuse existing root for hot reloads
+  container._reactRoot.render(<App />);
 }
-
-root.render(<App />);
