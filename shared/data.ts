@@ -313,9 +313,6 @@ console.log(
 
 export const visionBoardData: VisionBoardData = globalVisionBoardData;
 
-// Export teachers and admins for easy access
-export { teachers, admins };
-
 // Function to update milestone status
 export const updateMilestoneStatus = (
   studentId: string,
