@@ -51,6 +51,10 @@ export default function Index() {
     navigate('/teacher/login');
   };
 
+  const handleAdminDashboardClick = () => {
+    navigate('/admin/login');
+  };
+
   const getStatusColor = (status: Milestone['status']) => {
     switch (status) {
       case 'passed': return 'bg-green-100 border-green-300 text-green-800';
