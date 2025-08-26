@@ -1,6 +1,13 @@
 import "./global.css";
-import { createRoot } from "react-dom/client";
+import { createRoot, type Root } from "react-dom/client";
 import App from "./App";
+
+// Extend HTMLElement type to include our custom property
+declare global {
+  interface HTMLElement {
+    _reactRoot?: Root;
+  }
+}
 
 const container = document.getElementById("root")!;
 
