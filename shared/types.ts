@@ -51,7 +51,7 @@ export interface Admin {
   name: string;
   username: string;
   password: string;
-  role: 'admin';
+  role: "admin";
 }
 
 export interface VisionBoardData {

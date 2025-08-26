@@ -41,7 +41,14 @@ import {
 } from "@shared/data";
 import { Admin, Teacher, Subject } from "@shared/types";
 import { cn } from "@/lib/utils";
-import { Plus, Edit, Trash2, Users, BookOpen, GraduationCap } from "lucide-react";
+import {
+  Plus,
+  Edit,
+  Trash2,
+  Users,
+  BookOpen,
+  GraduationCap,
+} from "lucide-react";
 
 export default function AdminDashboard() {
   const [currentAdmin, setCurrentAdmin] = useState<Admin | null>(null);
@@ -137,7 +144,12 @@ export default function AdminDashboard() {
   };
 
   const handleUpdateTeacher = () => {
-    if (!selectedTeacher || !formData.name || !formData.username || !formData.password) {
+    if (
+      !selectedTeacher ||
+      !formData.name ||
+      !formData.username ||
+      !formData.password
+    ) {
       showFeedback("Please fill in all required fields");
       return;
     }
@@ -176,18 +188,18 @@ export default function AdminDashboard() {
   };
 
   const handleSubjectToggle = (subjectId: string, checked: boolean) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       subjects: checked
         ? [...prev.subjects, subjectId]
-        : prev.subjects.filter(id => id !== subjectId),
+        : prev.subjects.filter((id) => id !== subjectId),
     }));
   };
 
   const getSubjectDisplay = (subjectIds: string[]) => {
     return subjects
-      .filter(s => subjectIds.includes(s.id))
-      .map(s => (
+      .filter((s) => subjectIds.includes(s.id))
+      .map((s) => (
         <Badge key={s.id} className={cn("text-white mr-1 mb-1", s.color)}>
           {s.icon} {s.name}
         </Badge>
@@ -259,32 +271,40 @@ export default function AdminDashboard() {
               <div className="flex items-center justify-center gap-3">
                 <Users className="w-8 h-8 text-blue-600" />
                 <div>
-                  <div className="text-2xl font-bold text-blue-700">{data.students.length}</div>
+                  <div className="text-2xl font-bold text-blue-700">
+                    {data.students.length}
+                  </div>
                   <div className="text-sm text-blue-600">Total Students</div>
                 </div>
               </div>
             </CardContent>
           </Card>
-          
+
           <Card className="bg-gradient-to-r from-green-100 to-green-200 border-2 border-green-300">
             <CardContent className="p-4 text-center">
               <div className="flex items-center justify-center gap-3">
                 <GraduationCap className="w-8 h-8 text-green-600" />
                 <div>
-                  <div className="text-2xl font-bold text-green-700">{teachers.length}</div>
+                  <div className="text-2xl font-bold text-green-700">
+                    {teachers.length}
+                  </div>
                   <div className="text-sm text-green-600">Total Teachers</div>
                 </div>
               </div>
             </CardContent>
           </Card>
-          
+
           <Card className="bg-gradient-to-r from-purple-100 to-purple-200 border-2 border-purple-300">
             <CardContent className="p-4 text-center">
               <div className="flex items-center justify-center gap-3">
                 <BookOpen className="w-8 h-8 text-purple-600" />
                 <div>
-                  <div className="text-2xl font-bold text-purple-700">{subjects.length}</div>
-                  <div className="text-sm text-purple-600">Available Subjects</div>
+                  <div className="text-2xl font-bold text-purple-700">
+                    {subjects.length}
+                  </div>
+                  <div className="text-sm text-purple-600">
+                    Available Subjects
+                  </div>
                 </div>
               </div>
             </CardContent>
@@ -299,7 +319,10 @@ export default function AdminDashboard() {
                 <GraduationCap className="w-5 h-5" />
                 Teacher Management
               </CardTitle>
-              <Button onClick={openAddDialog} className="bg-green-600 hover:bg-green-700">
+              <Button
+                onClick={openAddDialog}
+                className="bg-green-600 hover:bg-green-700"
+              >
                 <Plus className="w-4 h-4 mr-2" />
                 Add Teacher
               </Button>
@@ -320,7 +343,9 @@ export default function AdminDashboard() {
                 <TableBody>
                   {teachers.map((teacher) => (
                     <TableRow key={teacher.id}>
-                      <TableCell className="font-medium">{teacher.name}</TableCell>
+                      <TableCell className="font-medium">
+                        {teacher.name}
+                      </TableCell>
                       <TableCell>{teacher.username}</TableCell>
                       <TableCell>
                         <code className="bg-gray-100 px-2 py-1 rounded text-sm">
@@ -355,8 +380,12 @@ export default function AdminDashboard() {
                   ))}
                   {teachers.length === 0 && (
                     <TableRow>
-                      <TableCell colSpan={5} className="text-center text-gray-500 py-8">
-                        No teachers found. Add your first teacher to get started.
+                      <TableCell
+                        colSpan={5}
+                        className="text-center text-gray-500 py-8"
+                      >
+                        No teachers found. Add your first teacher to get
+                        started.
                       </TableCell>
                     </TableRow>
                   )}
@@ -381,7 +410,9 @@ export default function AdminDashboard() {
                 <Input
                   id="add-name"
                   value={formData.name}
-                  onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, name: e.target.value }))
+                  }
                   placeholder="Enter teacher's full name"
                 />
               </div>
@@ -390,7 +421,12 @@ export default function AdminDashboard() {
                 <Input
                   id="add-username"
                   value={formData.username}
-                  onChange={(e) => setFormData(prev => ({ ...prev, username: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      username: e.target.value,
+                    }))
+                  }
                   placeholder="Enter username for login"
                 />
               </div>
@@ -399,7 +435,12 @@ export default function AdminDashboard() {
                 <Input
                   id="add-password"
                   value={formData.password}
-                  onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      password: e.target.value,
+                    }))
+                  }
                   placeholder="Enter password"
                 />
               </div>
@@ -407,15 +448,18 @@ export default function AdminDashboard() {
                 <Label>Assigned Subjects</Label>
                 <div className="grid grid-cols-2 gap-3 mt-2">
                   {subjects.map((subject) => (
-                    <div key={subject.id} className="flex items-center space-x-2">
+                    <div
+                      key={subject.id}
+                      className="flex items-center space-x-2"
+                    >
                       <Checkbox
                         id={`add-subject-${subject.id}`}
                         checked={formData.subjects.includes(subject.id)}
-                        onCheckedChange={(checked) => 
+                        onCheckedChange={(checked) =>
                           handleSubjectToggle(subject.id, checked as boolean)
                         }
                       />
-                      <Label 
+                      <Label
                         htmlFor={`add-subject-${subject.id}`}
                         className="flex items-center gap-2"
                       >
@@ -428,7 +472,10 @@ export default function AdminDashboard() {
               </div>
             </div>
             <DialogFooter>
-              <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>
+              <Button
+                variant="outline"
+                onClick={() => setIsAddDialogOpen(false)}
+              >
                 Cancel
               </Button>
               <Button onClick={handleAddTeacher}>Add Teacher</Button>
@@ -451,7 +498,9 @@ export default function AdminDashboard() {
                 <Input
                   id="edit-name"
                   value={formData.name}
-                  onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, name: e.target.value }))
+                  }
                   placeholder="Enter teacher's full name"
                 />
               </div>
@@ -460,7 +509,12 @@ export default function AdminDashboard() {
                 <Input
                   id="edit-username"
                   value={formData.username}
-                  onChange={(e) => setFormData(prev => ({ ...prev, username: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      username: e.target.value,
+                    }))
+                  }
                   placeholder="Enter username for login"
                 />
               </div>
@@ -469,7 +523,12 @@ export default function AdminDashboard() {
                 <Input
                   id="edit-password"
                   value={formData.password}
-                  onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      password: e.target.value,
+                    }))
+                  }
                   placeholder="Enter password"
                 />
               </div>
@@ -477,15 +536,18 @@ export default function AdminDashboard() {
                 <Label>Assigned Subjects</Label>
                 <div className="grid grid-cols-2 gap-3 mt-2">
                   {subjects.map((subject) => (
-                    <div key={subject.id} className="flex items-center space-x-2">
+                    <div
+                      key={subject.id}
+                      className="flex items-center space-x-2"
+                    >
                       <Checkbox
                         id={`edit-subject-${subject.id}`}
                         checked={formData.subjects.includes(subject.id)}
-                        onCheckedChange={(checked) => 
+                        onCheckedChange={(checked) =>
                           handleSubjectToggle(subject.id, checked as boolean)
                         }
                       />
-                      <Label 
+                      <Label
                         htmlFor={`edit-subject-${subject.id}`}
                         className="flex items-center gap-2"
                       >
@@ -498,7 +560,10 @@ export default function AdminDashboard() {
               </div>
             </div>
             <DialogFooter>
-              <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
+              <Button
+                variant="outline"
+                onClick={() => setIsEditDialogOpen(false)}
+              >
                 Cancel
               </Button>
               <Button onClick={handleUpdateTeacher}>Update Teacher</Button>
@@ -512,17 +577,18 @@ export default function AdminDashboard() {
             <DialogHeader>
               <DialogTitle>Delete Teacher</DialogTitle>
               <DialogDescription>
-                Are you sure you want to delete {selectedTeacher?.name}? This action cannot be undone.
+                Are you sure you want to delete {selectedTeacher?.name}? This
+                action cannot be undone.
               </DialogDescription>
             </DialogHeader>
             <DialogFooter>
-              <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
+              <Button
+                variant="outline"
+                onClick={() => setIsDeleteDialogOpen(false)}
+              >
                 Cancel
               </Button>
-              <Button 
-                variant="destructive" 
-                onClick={handleDeleteTeacher}
-              >
+              <Button variant="destructive" onClick={handleDeleteTeacher}>
                 Delete Teacher
               </Button>
             </DialogFooter>
