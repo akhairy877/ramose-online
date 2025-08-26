@@ -3,6 +3,7 @@ import {
   Student,
   Subject,
   Teacher,
+  Admin,
   Milestone,
   QuizAttempt,
 } from "./types";
@@ -43,6 +44,16 @@ export const subjects: Subject[] = [
     name: "Music",
     color: "bg-yellow-500 hover:bg-yellow-600",
     icon: "🎵",
+  },
+];
+
+export const admins: Admin[] = [
+  {
+    id: "admin-1",
+    name: "System Administrator",
+    username: "admin",
+    password: "admin123",
+    role: "admin",
   },
 ];
 
@@ -287,6 +298,7 @@ let globalVisionBoardData: VisionBoardData = {
   students: generateStudents(),
   subjects,
   teachers,
+  admins,
   currentWeek: 12,
   totalWeeks: 36,
 };
@@ -490,6 +502,80 @@ export const updateQuizAttemptScore = (
   );
 
   return true;
+};
+
+// Admin functions for teacher management
+export const addTeacher = (teacher: Omit<Teacher, "id">): boolean => {
+  const newId = (globalVisionBoardData.teachers.length + 1).toString();
+  const newTeacher: Teacher = {
+    ...teacher,
+    id: newId,
+  };
+
+  // Check if username already exists
+  if (
+    globalVisionBoardData.teachers.some((t) => t.username === teacher.username)
+  ) {
+    return false;
+  }
+
+  globalVisionBoardData.teachers.push(newTeacher);
+  return true;
+};
+
+export const updateTeacher = (
+  teacherId: string,
+  updatedTeacher: Partial<Teacher>,
+): boolean => {
+  const teacherIndex = globalVisionBoardData.teachers.findIndex(
+    (t) => t.id === teacherId,
+  );
+  if (teacherIndex === -1) return false;
+
+  // Check if username already exists (excluding current teacher)
+  if (
+    updatedTeacher.username &&
+    globalVisionBoardData.teachers.some(
+      (t) => t.username === updatedTeacher.username && t.id !== teacherId,
+    )
+  ) {
+    return false;
+  }
+
+  globalVisionBoardData.teachers[teacherIndex] = {
+    ...globalVisionBoardData.teachers[teacherIndex],
+    ...updatedTeacher,
+  };
+  return true;
+};
+
+export const deleteTeacher = (teacherId: string): boolean => {
+  const teacherIndex = globalVisionBoardData.teachers.findIndex(
+    (t) => t.id === teacherId,
+  );
+  if (teacherIndex === -1) return false;
+
+  globalVisionBoardData.teachers.splice(teacherIndex, 1);
+  return true;
+};
+
+export const getTeacherById = (teacherId: string): Teacher | null => {
+  return globalVisionBoardData.teachers.find((t) => t.id === teacherId) || null;
+};
+
+export const getAllTeachers = (): Teacher[] => {
+  return [...globalVisionBoardData.teachers];
+};
+
+export const getAdminByCredentials = (
+  username: string,
+  password: string,
+): Admin | null => {
+  return (
+    globalVisionBoardData.admins.find(
+      (a) => a.username === username && a.password === password,
+    ) || null
+  );
 };
 
 // Function to get current data (for React components to re-render)
