@@ -46,10 +46,19 @@ export interface Teacher {
   subjects: string[];
 }
 
+export interface Admin {
+  id: string;
+  name: string;
+  username: string;
+  password: string;
+  role: 'admin';
+}
+
 export interface VisionBoardData {
   students: Student[];
   subjects: Subject[];
   teachers: Teacher[];
+  admins: Admin[];
   currentWeek: number;
   totalWeeks: 36;
 }
