@@ -52,7 +52,7 @@ export const admins: Admin[] = [
     id: "admin-1",
     name: "System Administrator",
     username: "admin",
-    password: "admin123",
+    password: "+201015323048",
     role: "admin",
   },
 ];
