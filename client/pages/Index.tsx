@@ -299,14 +299,22 @@ export default function Index() {
           </CardContent>
         </Card>
 
-        {/* Teacher Access */}
+        {/* Access Buttons */}
         <div className="mt-4 sm:mt-6 text-center">
-          <Button
-            onClick={handleTeacherDashboardClick}
-            className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base"
-          >
-            🏫 Teacher Dashboard
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+            <Button
+              onClick={handleTeacherDashboardClick}
+              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base"
+            >
+              🏫 Teacher Dashboard
+            </Button>
+            <Button
+              onClick={handleAdminDashboardClick}
+              className="bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base"
+            >
+              🔐 Admin Dashboard
+            </Button>
+          </div>
         </div>
       </div>
 
