@@ -295,7 +295,7 @@ const generateStudents = (): Student[] => {
 
     students.push({
       id,
-      name: `Student ${i}`,
+      name: studentNames[i - 1], // Use index i-1 since array is 0-based but loop starts at 1
       careerGoal: careerGoals[Math.floor(Math.random() * careerGoals.length)],
       avatar: avatarColors[i % avatarColors.length],
       totalPoints,
