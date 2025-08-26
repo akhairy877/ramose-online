@@ -52,7 +52,7 @@ export const admins: Admin[] = [
     id: "admin-1",
     name: "System Administrator",
     username: "admin",
-    password: "admin123",
+    password: "+201015323048",
     role: "admin",
   },
 ];
@@ -272,6 +272,59 @@ const getCareerRelevance = (subject: string): string => {
   );
 };
 
+const studentNames = [
+  "Emma Johnson",
+  "Liam Smith",
+  "Olivia Brown",
+  "Noah Davis",
+  "Ava Wilson",
+  "Ethan Miller",
+  "Sophia Moore",
+  "Mason Taylor",
+  "Isabella Anderson",
+  "William Thomas",
+  "Mia Jackson",
+  "James White",
+  "Charlotte Harris",
+  "Benjamin Martin",
+  "Amelia Thompson",
+  "Lucas Garcia",
+  "Harper Martinez",
+  "Henry Robinson",
+  "Evelyn Clark",
+  "Alexander Rodriguez",
+  "Abigail Lewis",
+  "Michael Lee",
+  "Emily Walker",
+  "Daniel Hall",
+  "Elizabeth Allen",
+  "Matthew Young",
+  "Sofia Hernandez",
+  "Joseph King",
+  "Avery Wright",
+  "Samuel Lopez",
+  "Ella Hill",
+  "David Scott",
+  "Scarlett Green",
+  "Carter Adams",
+  "Victoria Baker",
+  "Wyatt Gonzalez",
+  "Grace Nelson",
+  "Owen Carter",
+  "Chloe Mitchell",
+  "Luke Perez",
+  "Zoey Roberts",
+  "Gabriel Turner",
+  "Penelope Phillips",
+  "Anthony Campbell",
+  "Layla Parker",
+  "Isaac Evans",
+  "Riley Edwards",
+  "Dylan Collins",
+  "Aria Stewart",
+  "Nathan Sanchez",
+];
+
 const generateStudents = (): Student[] => {
   const students: Student[] = [];
 
@@ -282,7 +335,7 @@ const generateStudents = (): Student[] => {
 
     students.push({
       id,
-      name: `Student ${i}`,
+      name: studentNames[i - 1] || `Student ${i}`,
       careerGoal: careerGoals[Math.floor(Math.random() * careerGoals.length)],
       avatar: avatarColors[i % avatarColors.length],
       totalPoints,
