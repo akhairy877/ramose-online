@@ -112,6 +112,19 @@ const avatarColors = [
   "bg-teal-200",
 ];
 
+const studentNames = [
+  "Emma Johnson", "Liam Smith", "Olivia Williams", "Noah Brown", "Ava Jones",
+  "Ethan Garcia", "Sophia Miller", "Mason Davis", "Isabella Rodriguez", "William Wilson",
+  "Mia Martinez", "James Anderson", "Charlotte Taylor", "Benjamin Thomas", "Amelia Jackson",
+  "Lucas White", "Harper Harris", "Henry Martin", "Evelyn Thompson", "Alexander Garcia",
+  "Abigail Martinez", "Michael Robinson", "Emily Clark", "Elijah Rodriguez", "Elizabeth Lewis",
+  "Logan Lee", "Sofia Walker", "Sebastian Hall", "Avery Allen", "Jackson Young",
+  "Ella Hernandez", "David King", "Scarlett Wright", "Joseph Lopez", "Grace Hill",
+  "Samuel Scott", "Chloe Green", "John Adams", "Victoria Baker", "Owen Gonzalez",
+  "Zoey Nelson", "Luke Carter", "Penelope Mitchell", "Gabriel Perez", "Riley Roberts",
+  "Daniel Turner", "Layla Phillips", "Matthew Campbell", "Aria Parker", "Jack Evans"
+];
+
 const generateMilestones = (studentId: string): Milestone[] => {
   const milestones: Milestone[] = [];
   const currentWeek = 12; // Current week from visionBoardData
