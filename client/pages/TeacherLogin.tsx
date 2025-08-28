@@ -119,42 +119,10 @@ export default function TeacherLogin() {
             {/* Demo Credentials */}
             <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
               <h4 className="text-sm font-medium text-blue-800 mb-3">
-                Available Teachers:
+                Teacher Accounts
               </h4>
-              <div className="text-sm text-blue-700 space-y-3">
-                <div className="border-b border-blue-200 pb-2">
-                  <div>
-                    <strong>Ahmed El-Agamy</strong> (Math & Science)
-                  </div>
-                  <div>
-                    <strong>Username:</strong> ahmed.elagamy
-                  </div>
-                  <div>
-                    <strong>Password:</strong> +201015323048
-                  </div>
-                </div>
-                <div className="border-b border-blue-200 pb-2">
-                  <div>
-                    <strong>Sarah Johnson</strong> (English & Art)
-                  </div>
-                  <div>
-                    <strong>Username:</strong> sarah.johnson
-                  </div>
-                  <div>
-                    <strong>Password:</strong> +201015323048
-                  </div>
-                </div>
-                <div>
-                  <div>
-                    <strong>Mike Chen</strong> (Physical Education & Music)
-                  </div>
-                  <div>
-                    <strong>Username:</strong> mike.chen
-                  </div>
-                  <div>
-                    <strong>Password:</strong> +201015323048
-                  </div>
-                </div>
+              <div className="text-sm text-blue-700">
+                No teacher accounts are currently available. Please contact your administrator if you need access.
               </div>
             </div>
 
