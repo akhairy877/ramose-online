@@ -58,7 +58,8 @@ export default function AdminLogin() {
               Access the admin dashboard to manage teachers and subjects
             </p>
             <p className="text-orange-700 text-xs mt-2">
-              Notice: All teacher accounts have been removed. Admin password updated.
+              Notice: All teacher accounts have been removed. Admin password
+              updated.
             </p>
           </CardHeader>
           <CardContent className="p-4 sm:p-6">

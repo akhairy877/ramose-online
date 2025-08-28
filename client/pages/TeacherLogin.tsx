@@ -116,7 +116,6 @@ export default function TeacherLogin() {
               </Button>
             </form>
 
-
             {/* Back to Vision Board */}
             <div className="mt-4 text-center">
               <Button
