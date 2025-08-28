@@ -116,15 +116,6 @@ export default function TeacherLogin() {
               </Button>
             </form>
 
-            {/* Demo Credentials */}
-            <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-              <h4 className="text-sm font-medium text-blue-800 mb-3">
-                Teacher Accounts
-              </h4>
-              <div className="text-sm text-blue-700">
-                No teacher accounts are currently available. Please contact your administrator if you need access.
-              </div>
-            </div>
 
             {/* Back to Vision Board */}
             <div className="mt-4 text-center">
