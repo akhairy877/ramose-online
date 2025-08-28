@@ -131,7 +131,9 @@ export default function Index() {
                 className="self-end bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-3 py-2 text-sm shadow-md border-2 border-green-200"
                 title="Cooperate to make this app available worldwide"
               >
-                <a href="mailto:ramose.online@gmail.com?subject=Grade%201%20Vision%20Boards">🤝 Help students worldwide</a>
+                <a href="mailto:ramose.online@gmail.com?subject=Grade%201%20Vision%20Boards">
+                  🤝 Help students worldwide
+                </a>
               </Button>
               <Select
                 value={selectedStudent.id}
