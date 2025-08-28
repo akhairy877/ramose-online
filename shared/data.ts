@@ -52,34 +52,12 @@ export const admins: Admin[] = [
     id: "admin-1",
     name: "System Administrator",
     username: "admin",
-    password: "+201015323048",
+    password: "NeverSayCan't",
     role: "admin",
   },
 ];
 
-export const teachers: Teacher[] = [
-  {
-    id: "1",
-    name: "Ahmed El-Agamy",
-    username: "ahmed.elagamy",
-    password: "+201015323048",
-    subjects: ["math", "science"],
-  },
-  {
-    id: "2",
-    name: "Sarah Johnson",
-    username: "sarah.johnson",
-    password: "+201015323048",
-    subjects: ["english", "art"],
-  },
-  {
-    id: "3",
-    name: "Mike Chen",
-    username: "mike.chen",
-    password: "+201015323048",
-    subjects: ["pe", "music"],
-  },
-];
+export const teachers: Teacher[] = [];
 
 const careerGoals = [
   "Doctor",
