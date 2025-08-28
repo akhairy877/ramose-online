@@ -228,6 +228,15 @@ export default function AdminDashboard() {
             </div>
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
               <Button
+                asChild
+                className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white"
+                title="Cooperate to make this app available worldwide"
+              >
+                <a href="mailto:ramose.online@gmail.com?subject=Grade%201%20Vision%20Boards">
+                  🤝 Help students worldwide
+                </a>
+              </Button>
+              <Button
                 onClick={() => navigate("/")}
                 variant="outline"
                 className="border-orange-200 text-orange-600"
