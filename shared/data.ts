@@ -409,6 +409,7 @@ export const updateStudentCareerGoal = (
   if (!student) return false;
 
   student.careerGoal = newGoal;
+  if (typeof window !== "undefined") DataStorage.save(globalVisionBoardData);
   return true;
 };
 
