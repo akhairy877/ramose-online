@@ -428,6 +428,7 @@ export const updateMilestoneCareerRelevance = (
   if (!milestone) return false;
 
   milestone.careerRelevance = newRelevance;
+  if (typeof window !== "undefined") DataStorage.save(globalVisionBoardData);
   return true;
 };
 
