@@ -145,10 +145,10 @@ export default function Index() {
           <div className="flex flex-col sm:flex-row lg:flex-row items-center justify-between gap-2 sm:gap-4">
             <div className="text-center sm:text-left lg:text-left">
               <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 bg-clip-text text-transparent">
-                🌟 Grade 1 Vision Boards 🌟
+                {title}
               </h1>
               <p className="text-gray-600 mt-1 sm:mt-2 text-sm sm:text-base">
-                Track your journey to achieving your career dreams!
+                {subtitle}
               </p>
             </div>
 
@@ -160,7 +160,7 @@ export default function Index() {
                 title="Cooperate to make this app available worldwide"
               >
                 <a href="mailto:ramose.online@gmail.com?subject=Grade%201%20Vision%20Boards">
-                  🤝 Help students worldwide
+                  {helpCta}
                 </a>
               </Button>
               <Select
@@ -243,14 +243,14 @@ export default function Index() {
         <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row items-center gap-2 sm:gap-4 flex-wrap">
           <div className="flex items-center gap-2">
             <span className="text-xs sm:text-sm font-medium text-gray-700">
-              Current Week:
+              {currentWeekLabel}
             </span>
             <Badge className="bg-blue-500 text-white text-sm sm:text-lg px-2 sm:px-3 py-1">
               Week {currentWeek}
             </Badge>
           </div>
           <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
-            <span>Progress:</span>
+            <span>{progressLabel}</span>
             <div className="w-24 sm:w-32 bg-gray-200 rounded-full h-2">
               <div
                 className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full"
@@ -273,7 +273,7 @@ export default function Index() {
             {/* Header Row */}
             <div className="sticky left-0 bg-white z-10 p-2 rounded border">
               <div className="font-bold text-center text-purple-700 text-sm">
-                Subjects
+                {subjectsHeader}
               </div>
             </div>
             {weeks.map((week) => (
@@ -296,10 +296,10 @@ export default function Index() {
                 </div>
                 <div className="text-xs text-gray-500 hidden sm:block">
                   {week < currentWeek
-                    ? "Past"
+                    ? weekPast
                     : week === currentWeek
-                      ? "Current"
-                      : "Future"}
+                      ? weekCurrent
+                      : weekFuture}
                 </div>
               </div>
             ))}
@@ -327,7 +327,7 @@ export default function Index() {
                       {subject.name}
                     </div>
                     <div className="text-xs text-center opacity-90 mt-1">
-                      36 Lessons
+                      {lessonsLabel}
                     </div>
                   </div>
                 </div>
@@ -391,7 +391,7 @@ export default function Index() {
                               ) : (
                                 <div className="text-xs text-gray-500 hidden sm:block">
                                   {milestone.status === "not-started"
-                                    ? "Not Started"
+                                    ? legendNotStarted
                                     : "Ready to Start"}
                                 </div>
                               )}
@@ -429,23 +429,23 @@ export default function Index() {
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 sm:gap-4">
               <div className="flex items-center gap-2">
                 <span className="text-lg sm:text-xl">✅</span>
-                <span className="text-xs sm:text-sm">Passed</span>
+                <span className="text-xs sm:text-sm">{legendPassed}</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-lg sm:text-xl">⚠️</span>
-                <span className="text-xs sm:text-sm">Can Retry</span>
+                <span className="text-xs sm:text-sm">{legendRetry}</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-lg sm:text-xl">❌</span>
-                <span className="text-xs sm:text-sm">Failed (3 attempts)</span>
+                <span className="text-xs sm:text-sm">{legendFailed}</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-lg sm:text-xl">🔄</span>
-                <span className="text-xs sm:text-sm">In Progress</span>
+                <span className="text-xs sm:text-sm">{legendInProgress}</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-lg sm:text-xl">⏳</span>
-                <span className="text-xs sm:text-sm">Not Started</span>
+                <span className="text-xs sm:text-sm">{legendNotStarted}</span>
               </div>
             </div>
           </CardContent>
@@ -458,13 +458,13 @@ export default function Index() {
               onClick={handleTeacherDashboardClick}
               className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base"
             >
-              🏫 Teacher Dashboard
+              {teacherCta}
             </Button>
             <Button
               onClick={handleAdminDashboardClick}
               className="bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base"
             >
-              🔐 Admin Dashboard
+              {adminCta}
             </Button>
           </div>
         </div>
