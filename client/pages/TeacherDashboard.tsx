@@ -26,6 +26,7 @@ import {
 } from "@shared/data";
 import { Teacher, Student, Milestone } from "@shared/types";
 import { cn } from "@/lib/utils";
+import { useContent } from "@/lib/content";
 
 export default function TeacherDashboard() {
   const [currentTeacher, setCurrentTeacher] = useState<Teacher | null>(null);
@@ -35,6 +36,7 @@ export default function TeacherDashboard() {
   const [feedbackMessage, setFeedbackMessage] = useState<string>("");
   const [isUpdating, setIsUpdating] = useState<string>(""); // Track which milestone is being updated
   const navigate = useNavigate();
+  const [helpCta] = useContent("home.helpCta");
 
   // Refresh data function
   const refreshData = () => {
@@ -228,7 +230,7 @@ export default function TeacherDashboard() {
                 title="Cooperate to make this app available worldwide"
               >
                 <a href="mailto:ramose.online@gmail.com?subject=Grade%201%20Vision%20Boards">
-                  🤝 Help students worldwide
+                  {helpCta}
                 </a>
               </Button>
               <Button
