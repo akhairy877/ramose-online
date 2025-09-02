@@ -432,196 +432,192 @@ export default function TeacherDashboard() {
                       selectedStudent.id,
                       selectedSubject,
                     ).map((milestone) => (
-                        <Card
-                          key={milestone.id}
-                          className="p-4 border rounded-lg bg-white shadow-sm"
-                        >
-                          {/* Header */}
-                          <div className="flex items-center justify-between mb-3">
-                            <div className="text-sm font-medium">
-                              Week {milestone.week}
-                            </div>
-                            <Badge
-                              className={cn(
-                                "text-xs",
-                                milestone.status === "passed"
-                                  ? "bg-green-100 text-green-800"
-                                  : milestone.status === "failed-retryable"
-                                    ? "bg-yellow-100 text-yellow-800"
-                                    : milestone.status === "failed-permanent"
-                                      ? "bg-red-100 text-red-800"
-                                      : "bg-gray-100 text-gray-800",
-                              )}
-                            >
-                              {milestone.status.replace("-", " ")}
-                            </Badge>
+                      <Card
+                        key={milestone.id}
+                        className="p-4 border rounded-lg bg-white shadow-sm"
+                      >
+                        {/* Header */}
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="text-sm font-medium">
+                            Week {milestone.week}
                           </div>
+                          <Badge
+                            className={cn(
+                              "text-xs",
+                              milestone.status === "passed"
+                                ? "bg-green-100 text-green-800"
+                                : milestone.status === "failed-retryable"
+                                  ? "bg-yellow-100 text-yellow-800"
+                                  : milestone.status === "failed-permanent"
+                                    ? "bg-red-100 text-red-800"
+                                    : "bg-gray-100 text-gray-800",
+                            )}
+                          >
+                            {milestone.status.replace("-", " ")}
+                          </Badge>
+                        </div>
 
-                          {/* Lesson Title */}
-                          <div className="text-xs text-gray-600 mb-3 font-medium">
-                            {milestone.lessonTitle}
-                          </div>
+                        {/* Lesson Title */}
+                        <div className="text-xs text-gray-600 mb-3 font-medium">
+                          {milestone.lessonTitle}
+                        </div>
 
-                          {/* Career Relevance */}
-                          <div className="mb-3">
-                            <Label className="text-xs font-medium text-purple-700 mb-1 block">
-                              Career Relevance
-                            </Label>
-                            <Textarea
-                              defaultValue={milestone.careerRelevance}
-                              className="text-xs min-h-[60px] border-purple-200"
-                              placeholder="Explain how this lesson relates to career goals..."
-                              onBlur={(e) =>
-                                handleCareerRelevanceUpdate(
-                                  selectedStudent.id,
-                                  milestone.id,
-                                  e.target.value,
-                                )
-                              }
-                            />
-                          </div>
+                        {/* Career Relevance */}
+                        <div className="mb-3">
+                          <Label className="text-xs font-medium text-purple-700 mb-1 block">
+                            Career Relevance
+                          </Label>
+                          <Textarea
+                            defaultValue={milestone.careerRelevance}
+                            className="text-xs min-h-[60px] border-purple-200"
+                            placeholder="Explain how this lesson relates to career goals..."
+                            onBlur={(e) =>
+                              handleCareerRelevanceUpdate(
+                                selectedStudent.id,
+                                milestone.id,
+                                e.target.value,
+                              )
+                            }
+                          />
+                        </div>
 
-                          {/* Used Attempts */}
-                          <div className="mb-3">
-                            <Label className="text-xs font-medium text-blue-700 mb-1 block">
-                              Used Attempts
-                            </Label>
-                            <div className="flex items-center gap-2">
-                              <Input
-                                type="number"
-                                min="0"
-                                max="3"
-                                defaultValue={milestone.quizAttempts.length}
-                                className="w-20 text-xs border-blue-200"
-                                onBlur={(e) => {
-                                  const value = parseInt(e.target.value);
-                                  if (value >= 0 && value <= 3) {
-                                    handleUsedAttemptsUpdate(
-                                      selectedStudent.id,
-                                      milestone.id,
-                                      value,
-                                    );
-                                  }
-                                }}
-                              />
-                              <span className="text-xs text-gray-500">
-                                / 3 attempts
-                              </span>
-                              {milestone.quizAttempts.length >= 3 &&
-                                !milestone.quizAttempts.some(
-                                  (a) => a.passed,
-                                ) && (
-                                  <Badge className="bg-red-100 text-red-800 text-xs">
-                                    Max reached
-                                  </Badge>
-                                )}
-                            </div>
-                          </div>
-
-                          {/* Quiz Attempts Scores */}
-                          {milestone.quizAttempts.length > 0 && (
-                            <div className="mb-3">
-                              <Label className="text-xs font-medium text-green-700 mb-2 block">
-                                Quiz Attempts & Scores
-                              </Label>
-                              <div className="space-y-2">
-                                {milestone.quizAttempts.map((attempt) => (
-                                  <div
-                                    key={attempt.attempt}
-                                    className="flex items-center gap-3 p-2 bg-gray-50 rounded border"
-                                  >
-                                    <div className="flex items-center gap-2">
-                                      <Badge className="bg-gray-200 text-gray-800 text-xs">
-                                        Attempt {attempt.attempt}
-                                      </Badge>
-                                      <span className="text-xs text-gray-500">
-                                        {new Date(
-                                          attempt.date,
-                                        ).toLocaleDateString()}
-                                      </span>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                      <Input
-                                        type="number"
-                                        min="0"
-                                        max="100"
-                                        defaultValue={attempt.grade}
-                                        className="w-16 text-xs border-green-200"
-                                        onBlur={(e) => {
-                                          const value = parseInt(
-                                            e.target.value,
-                                          );
-                                          if (value >= 0 && value <= 100) {
-                                            handleQuizScoreUpdate(
-                                              selectedStudent.id,
-                                              milestone.id,
-                                              attempt.attempt,
-                                              value,
-                                            );
-                                          }
-                                        }}
-                                      />
-                                      <span className="text-xs text-gray-500">
-                                        %
-                                      </span>
-                                      <Badge
-                                        className={cn(
-                                          "text-xs",
-                                          attempt.passed
-                                            ? "bg-green-100 text-green-800"
-                                            : "bg-red-100 text-red-800",
-                                        )}
-                                      >
-                                        {attempt.passed ? "✅ Pass" : "❌ Fail"}
-                                      </Badge>
-                                    </div>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-
-                          {/* Status Buttons */}
-                          <div className="flex gap-1 flex-wrap">
-                            {[
-                              "not-started",
-                              "in-progress",
-                              "passed",
-                              "failed-retryable",
-                              "failed-permanent",
-                            ].map((status) => (
-                              <Button
-                                key={status}
-                                size="sm"
-                                variant={
-                                  milestone.status === status
-                                    ? "default"
-                                    : "outline"
-                                }
-                                className="text-xs px-2 py-1 h-auto"
-                                onClick={() =>
-                                  handleMilestoneStatusUpdate(
+                        {/* Used Attempts */}
+                        <div className="mb-3">
+                          <Label className="text-xs font-medium text-blue-700 mb-1 block">
+                            Used Attempts
+                          </Label>
+                          <div className="flex items-center gap-2">
+                            <Input
+                              type="number"
+                              min="0"
+                              max="3"
+                              defaultValue={milestone.quizAttempts.length}
+                              className="w-20 text-xs border-blue-200"
+                              onBlur={(e) => {
+                                const value = parseInt(e.target.value);
+                                if (value >= 0 && value <= 3) {
+                                  handleUsedAttemptsUpdate(
                                     selectedStudent.id,
                                     milestone.id,
-                                    status as Milestone["status"],
-                                  )
+                                    value,
+                                  );
                                 }
-                                disabled={isUpdating === milestone.id}
-                              >
-                                {status === "not-started"
-                                  ? "⏳"
-                                  : status === "in-progress"
-                                    ? "🔄"
-                                    : status === "passed"
-                                      ? "��"
-                                      : status === "failed-retryable"
-                                        ? "⚠️"
-                                        : "❌"}
-                              </Button>
-                            ))}
+                              }}
+                            />
+                            <span className="text-xs text-gray-500">
+                              / 3 attempts
+                            </span>
+                            {milestone.quizAttempts.length >= 3 &&
+                              !milestone.quizAttempts.some((a) => a.passed) && (
+                                <Badge className="bg-red-100 text-red-800 text-xs">
+                                  Max reached
+                                </Badge>
+                              )}
                           </div>
-                        </Card>
-                      ))}
+                        </div>
+
+                        {/* Quiz Attempts Scores */}
+                        {milestone.quizAttempts.length > 0 && (
+                          <div className="mb-3">
+                            <Label className="text-xs font-medium text-green-700 mb-2 block">
+                              Quiz Attempts & Scores
+                            </Label>
+                            <div className="space-y-2">
+                              {milestone.quizAttempts.map((attempt) => (
+                                <div
+                                  key={attempt.attempt}
+                                  className="flex items-center gap-3 p-2 bg-gray-50 rounded border"
+                                >
+                                  <div className="flex items-center gap-2">
+                                    <Badge className="bg-gray-200 text-gray-800 text-xs">
+                                      Attempt {attempt.attempt}
+                                    </Badge>
+                                    <span className="text-xs text-gray-500">
+                                      {new Date(
+                                        attempt.date,
+                                      ).toLocaleDateString()}
+                                    </span>
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <Input
+                                      type="number"
+                                      min="0"
+                                      max="100"
+                                      defaultValue={attempt.grade}
+                                      className="w-16 text-xs border-green-200"
+                                      onBlur={(e) => {
+                                        const value = parseInt(e.target.value);
+                                        if (value >= 0 && value <= 100) {
+                                          handleQuizScoreUpdate(
+                                            selectedStudent.id,
+                                            milestone.id,
+                                            attempt.attempt,
+                                            value,
+                                          );
+                                        }
+                                      }}
+                                    />
+                                    <span className="text-xs text-gray-500">
+                                      %
+                                    </span>
+                                    <Badge
+                                      className={cn(
+                                        "text-xs",
+                                        attempt.passed
+                                          ? "bg-green-100 text-green-800"
+                                          : "bg-red-100 text-red-800",
+                                      )}
+                                    >
+                                      {attempt.passed ? "✅ Pass" : "❌ Fail"}
+                                    </Badge>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Status Buttons */}
+                        <div className="flex gap-1 flex-wrap">
+                          {[
+                            "not-started",
+                            "in-progress",
+                            "passed",
+                            "failed-retryable",
+                            "failed-permanent",
+                          ].map((status) => (
+                            <Button
+                              key={status}
+                              size="sm"
+                              variant={
+                                milestone.status === status
+                                  ? "default"
+                                  : "outline"
+                              }
+                              className="text-xs px-2 py-1 h-auto"
+                              onClick={() =>
+                                handleMilestoneStatusUpdate(
+                                  selectedStudent.id,
+                                  milestone.id,
+                                  status as Milestone["status"],
+                                )
+                              }
+                              disabled={isUpdating === milestone.id}
+                            >
+                              {status === "not-started"
+                                ? "⏳"
+                                : status === "in-progress"
+                                  ? "🔄"
+                                  : status === "passed"
+                                    ? "��"
+                                    : status === "failed-retryable"
+                                      ? "⚠️"
+                                      : "❌"}
+                            </Button>
+                          ))}
+                        </div>
+                      </Card>
+                    ))}
                   </div>
                 </div>
               ) : (

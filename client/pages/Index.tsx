@@ -51,7 +51,9 @@ export default function Index() {
   useEffect(() => {
     const saved = localStorage.getItem("selectedStudentId");
     if (saved) {
-      const student = getCurrentVisionBoardData().students.find((s) => s.id === saved);
+      const student = getCurrentVisionBoardData().students.find(
+        (s) => s.id === saved,
+      );
       if (student) setSelectedStudent(student);
     }
   }, []);

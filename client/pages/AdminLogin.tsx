@@ -46,9 +46,7 @@ export default function AdminLogin() {
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-red-600 via-orange-600 to-yellow-600 bg-clip-text text-transparent mb-2">
             {portalTitle}
           </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            {portalSubtitle}
-          </p>
+          <p className="text-gray-600 text-sm sm:text-base">{portalSubtitle}</p>
         </div>
 
         {/* Login Form */}

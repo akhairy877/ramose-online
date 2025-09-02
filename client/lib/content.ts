@@ -54,7 +54,10 @@ let contentCache: Record<string, string> | null = null;
 
 function ensureCache() {
   if (!contentCache) {
-    contentCache = safeLocalStorage.get<Record<string, string>>(CONTENT_KEY, {});
+    contentCache = safeLocalStorage.get<Record<string, string>>(
+      CONTENT_KEY,
+      {},
+    );
   }
   return contentCache;
 }
@@ -62,7 +65,10 @@ function ensureCache() {
 function subscribe(callback: () => void) {
   const handler = (e: StorageEvent) => {
     if (e.key === CONTENT_KEY) {
-      contentCache = safeLocalStorage.get<Record<string, string>>(CONTENT_KEY, {});
+      contentCache = safeLocalStorage.get<Record<string, string>>(
+        CONTENT_KEY,
+        {},
+      );
       callback();
     }
   };
