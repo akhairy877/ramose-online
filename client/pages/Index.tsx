@@ -70,6 +70,7 @@ export default function Index() {
         if (updatedStudent) {
           setSelectedStudent(updatedStudent);
         }
+        localStorage.setItem("selectedStudentId", selectedStudent.id);
       }
     };
 
