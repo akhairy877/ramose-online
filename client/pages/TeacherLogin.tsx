@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { teachers } from "@shared/data";
+import { getAllTeachers } from "@shared/data";
 import { useContent } from "@/lib/content";
 
 export default function TeacherLogin() {
