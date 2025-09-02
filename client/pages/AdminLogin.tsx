@@ -57,13 +57,6 @@ export default function AdminLogin() {
             <CardTitle className="text-xl sm:text-2xl text-gray-800">
               Administrator Login
             </CardTitle>
-            <p className="text-gray-600 text-xs sm:text-sm">
-              Access the admin dashboard to manage teachers and subjects
-            </p>
-            <p className="text-orange-700 text-xs mt-2">
-              Notice: All teacher accounts have been removed. Admin password
-              updated.
-            </p>
           </CardHeader>
           <CardContent className="p-4 sm:p-6">
             <form onSubmit={handleLogin} className="space-y-4">

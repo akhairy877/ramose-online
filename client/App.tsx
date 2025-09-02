@@ -9,7 +9,6 @@ import TeacherLogin from "./pages/TeacherLogin";
 import TeacherDashboard from "./pages/TeacherDashboard";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
-import { ContentManager } from "@/components/ContentManager";
 
 const queryClient = new QueryClient();
 
@@ -19,7 +18,6 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <ContentManager />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/teacher/login" element={<TeacherLogin />} />
