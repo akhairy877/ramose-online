@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { teachers } from "@shared/data";
+import { useContent } from "@/lib/content";
 
 export default function TeacherLogin() {
   const [username, setUsername] = useState("");
@@ -13,6 +14,8 @@ export default function TeacherLogin() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [portalTitle] = useContent("login.teacher.title");
+  const [portalSubtitle] = useContent("login.teacher.subtitle");
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,10 +46,10 @@ export default function TeacherLogin() {
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
-            🏫 Teacher Portal
+            {portalTitle}
           </h1>
           <p className="text-gray-600 text-sm sm:text-base">
-            Access your student management dashboard
+            {portalSubtitle}
           </p>
         </div>
 
