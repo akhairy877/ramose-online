@@ -403,7 +403,7 @@ export default function TeacherDashboard() {
                         {subject.name}
                       </div>
                       <div className="text-xs opacity-75">
-                        36 weeks curriculum
+                        {totalWeeks} weeks curriculum
                       </div>
                     </div>
                   </Button>
@@ -431,9 +431,7 @@ export default function TeacherDashboard() {
                     {getMilestonesForStudentAndSubject(
                       selectedStudent.id,
                       selectedSubject,
-                    )
-                      .slice(0, 8) // Show first 8 weeks for better UX
-                      .map((milestone) => (
+                    ).map((milestone) => (
                         <Card
                           key={milestone.id}
                           className="p-4 border rounded-lg bg-white shadow-sm"
@@ -615,7 +613,7 @@ export default function TeacherDashboard() {
                                   : status === "in-progress"
                                     ? "🔄"
                                     : status === "passed"
-                                      ? "✅"
+                                      ? "��"
                                       : status === "failed-retryable"
                                         ? "⚠️"
                                         : "❌"}
