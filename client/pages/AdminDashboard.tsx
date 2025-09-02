@@ -41,6 +41,7 @@ import {
 } from "@shared/data";
 import { Admin, Teacher, Subject } from "@shared/types";
 import { cn } from "@/lib/utils";
+import { useContent } from "@/lib/content";
 import {
   Plus,
   Edit,
@@ -65,6 +66,7 @@ export default function AdminDashboard() {
     subjects: [] as string[],
   });
   const navigate = useNavigate();
+  const [helpCta] = useContent("home.helpCta");
 
   useEffect(() => {
     const adminData = localStorage.getItem("currentAdmin");
@@ -233,7 +235,7 @@ export default function AdminDashboard() {
                 title="Cooperate to make this app available worldwide"
               >
                 <a href="mailto:ramose.online@gmail.com?subject=Grade%201%20Vision%20Boards">
-                  🤝 Help students worldwide
+                  {helpCta}
                 </a>
               </Button>
               <Button

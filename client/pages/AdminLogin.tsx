@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { getAdminByCredentials } from "@shared/data";
+import { useContent } from "@/lib/content";
 
 export default function AdminLogin() {
   const [username, setUsername] = useState("");
@@ -13,6 +14,8 @@ export default function AdminLogin() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [portalTitle] = useContent("login.admin.title");
+  const [portalSubtitle] = useContent("login.admin.subtitle");
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,11 +44,9 @@ export default function AdminLogin() {
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-red-600 via-orange-600 to-yellow-600 bg-clip-text text-transparent mb-2">
-            🔐 Admin Portal
+            {portalTitle}
           </h1>
-          <p className="text-gray-600 text-sm sm:text-base">
-            System Administration Access
-          </p>
+          <p className="text-gray-600 text-sm sm:text-base">{portalSubtitle}</p>
         </div>
 
         {/* Login Form */}
@@ -54,13 +55,6 @@ export default function AdminLogin() {
             <CardTitle className="text-xl sm:text-2xl text-gray-800">
               Administrator Login
             </CardTitle>
-            <p className="text-gray-600 text-xs sm:text-sm">
-              Access the admin dashboard to manage teachers and subjects
-            </p>
-            <p className="text-orange-700 text-xs mt-2">
-              Notice: All teacher accounts have been removed. Admin password
-              updated.
-            </p>
           </CardHeader>
           <CardContent className="p-4 sm:p-6">
             <form onSubmit={handleLogin} className="space-y-4">

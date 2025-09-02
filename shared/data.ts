@@ -7,6 +7,7 @@ import {
   Milestone,
   QuizAttempt,
 } from "./types";
+import { DataStorage } from "./persistence";
 
 export const subjects: Subject[] = [
   {
@@ -325,7 +326,8 @@ const generateStudents = (): Student[] => {
 };
 
 // Create a global data store that can be updated
-let globalVisionBoardData: VisionBoardData = {
+const loadedData = typeof window !== "undefined" ? DataStorage.load() : null;
+let globalVisionBoardData: VisionBoardData = loadedData ?? {
   students: generateStudents(),
   subjects,
   teachers,
@@ -333,6 +335,9 @@ let globalVisionBoardData: VisionBoardData = {
   currentWeek: 12,
   totalWeeks: 36,
 };
+if (!loadedData && typeof window !== "undefined") {
+  DataStorage.save(globalVisionBoardData);
+}
 
 // Force data regeneration for debugging
 console.log("Generated students:", globalVisionBoardData.students.length);
@@ -394,6 +399,7 @@ export const updateMilestoneStatus = (
     0,
   );
 
+  if (typeof window !== "undefined") DataStorage.save(globalVisionBoardData);
   return true;
 };
 
@@ -408,6 +414,7 @@ export const updateStudentCareerGoal = (
   if (!student) return false;
 
   student.careerGoal = newGoal;
+  if (typeof window !== "undefined") DataStorage.save(globalVisionBoardData);
   return true;
 };
 
@@ -426,6 +433,7 @@ export const updateMilestoneCareerRelevance = (
   if (!milestone) return false;
 
   milestone.careerRelevance = newRelevance;
+  if (typeof window !== "undefined") DataStorage.save(globalVisionBoardData);
   return true;
 };
 
@@ -484,6 +492,7 @@ export const updateMilestoneUsedAttempts = (
     0,
   );
 
+  if (typeof window !== "undefined") DataStorage.save(globalVisionBoardData);
   return true;
 };
 
@@ -532,6 +541,7 @@ export const updateQuizAttemptScore = (
     0,
   );
 
+  if (typeof window !== "undefined") DataStorage.save(globalVisionBoardData);
   return true;
 };
 
@@ -551,6 +561,7 @@ export const addTeacher = (teacher: Omit<Teacher, "id">): boolean => {
   }
 
   globalVisionBoardData.teachers.push(newTeacher);
+  if (typeof window !== "undefined") DataStorage.save(globalVisionBoardData);
   return true;
 };
 
@@ -577,6 +588,7 @@ export const updateTeacher = (
     ...globalVisionBoardData.teachers[teacherIndex],
     ...updatedTeacher,
   };
+  if (typeof window !== "undefined") DataStorage.save(globalVisionBoardData);
   return true;
 };
 
@@ -587,6 +599,7 @@ export const deleteTeacher = (teacherId: string): boolean => {
   if (teacherIndex === -1) return false;
 
   globalVisionBoardData.teachers.splice(teacherIndex, 1);
+  if (typeof window !== "undefined") DataStorage.save(globalVisionBoardData);
   return true;
 };
 
