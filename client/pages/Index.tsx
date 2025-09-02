@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { MilestoneDialog } from "@/components/MilestoneDialog";
 import { cn } from "@/lib/utils";
+import { useContent } from "@/lib/content";
 
 export default function Index() {
   const [currentData, setCurrentData] = useState(() =>
