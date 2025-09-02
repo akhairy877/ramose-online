@@ -325,14 +325,19 @@ const generateStudents = (): Student[] => {
 };
 
 // Create a global data store that can be updated
-let globalVisionBoardData: VisionBoardData = {
-  students: generateStudents(),
-  subjects,
-  teachers,
-  admins,
-  currentWeek: 12,
-  totalWeeks: 36,
-};
+const loadedData = typeof window !== "undefined" ? DataStorage.load() : null;
+let globalVisionBoardData: VisionBoardData =
+  loadedData ?? {
+    students: generateStudents(),
+    subjects,
+    teachers,
+    admins,
+    currentWeek: 12,
+    totalWeeks: 36,
+  };
+if (!loadedData && typeof window !== "undefined") {
+  DataStorage.save(globalVisionBoardData);
+}
 
 // Force data regeneration for debugging
 console.log("Generated students:", globalVisionBoardData.students.length);
