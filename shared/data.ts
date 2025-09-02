@@ -583,6 +583,7 @@ export const updateTeacher = (
     ...globalVisionBoardData.teachers[teacherIndex],
     ...updatedTeacher,
   };
+  if (typeof window !== "undefined") DataStorage.save(globalVisionBoardData);
   return true;
 };
 
