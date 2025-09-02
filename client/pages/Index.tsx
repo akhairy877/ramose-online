@@ -47,6 +47,15 @@ export default function Index() {
   const { subjects, currentWeek } = currentData;
   const navigate = useNavigate();
 
+  // Restore preferred student
+  useEffect(() => {
+    const saved = localStorage.getItem("selectedStudentId");
+    if (saved) {
+      const student = getCurrentVisionBoardData().students.find((s) => s.id === saved);
+      if (student) setSelectedStudent(student);
+    }
+  }, []);
+
   // Refresh data on component mount and periodically
   useEffect(() => {
     const refreshData = () => {
