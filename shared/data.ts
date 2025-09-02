@@ -487,6 +487,7 @@ export const updateMilestoneUsedAttempts = (
     0,
   );
 
+  if (typeof window !== "undefined") DataStorage.save(globalVisionBoardData);
   return true;
 };
 
