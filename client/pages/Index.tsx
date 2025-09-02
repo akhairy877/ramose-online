@@ -23,6 +23,23 @@ export default function Index() {
   const [selectedStudent, setSelectedStudent] = useState<Student>(
     () => getCurrentVisionBoardData().students[0],
   );
+  const [title] = useContent("home.title");
+  const [subtitle] = useContent("home.subtitle");
+  const [helpCta] = useContent("home.helpCta");
+  const [subjectsHeader] = useContent("home.subjectsHeader");
+  const [lessonsLabel] = useContent("home.lessonsLabel");
+  const [currentWeekLabel] = useContent("home.currentWeek");
+  const [progressLabel] = useContent("home.progress");
+  const [weekPast] = useContent("home.week.past");
+  const [weekCurrent] = useContent("home.week.current");
+  const [weekFuture] = useContent("home.week.future");
+  const [legendPassed] = useContent("home.legend.passed");
+  const [legendRetry] = useContent("home.legend.retry");
+  const [legendFailed] = useContent("home.legend.failed");
+  const [legendInProgress] = useContent("home.legend.inprogress");
+  const [legendNotStarted] = useContent("home.legend.notstarted");
+  const [teacherCta] = useContent("home.teacherCta");
+  const [adminCta] = useContent("home.adminCta");
   const [selectedMilestone, setSelectedMilestone] = useState<Milestone | null>(
     null,
   );
