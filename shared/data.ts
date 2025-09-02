@@ -7,6 +7,7 @@ import {
   Milestone,
   QuizAttempt,
 } from "./types";
+import { DataStorage } from "./persistence";
 
 export const subjects: Subject[] = [
   {
