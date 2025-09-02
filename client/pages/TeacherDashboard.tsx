@@ -35,6 +35,7 @@ export default function TeacherDashboard() {
   const [currentData, setCurrentData] = useState(visionBoardData);
   const [feedbackMessage, setFeedbackMessage] = useState<string>("");
   const [isUpdating, setIsUpdating] = useState<string>(""); // Track which milestone is being updated
+  const [careerGoalInput, setCareerGoalInput] = useState("");
   const navigate = useNavigate();
   const [helpCta] = useContent("home.helpCta");
 
@@ -62,6 +63,11 @@ export default function TeacherDashboard() {
       navigate("/teacher/login");
     }
   }, [navigate]);
+
+  // Keep career goal input in sync with the selected student
+  useEffect(() => {
+    setCareerGoalInput(selectedStudent?.careerGoal ?? "");
+  }, [selectedStudent?.id, selectedStudent?.careerGoal]);
 
   const handleLogout = () => {
     localStorage.removeItem("currentTeacher");
@@ -339,9 +345,12 @@ export default function TeacherDashboard() {
                       Career Goal
                     </Label>
                     <Input
-                      defaultValue={selectedStudent.careerGoal}
+                      value={careerGoalInput}
+                      disabled={!selectedStudent}
                       className="mt-1 border-purple-200"
+                      onChange={(e) => setCareerGoalInput(e.target.value)}
                       onBlur={(e) =>
+                        selectedStudent &&
                         handleCareerGoalUpdate(
                           selectedStudent.id,
                           e.target.value,
