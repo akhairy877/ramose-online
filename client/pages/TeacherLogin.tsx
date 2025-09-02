@@ -25,7 +25,7 @@ export default function TeacherLogin() {
     // Simulate login delay
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    const teacher = teachers.find(
+    const teacher = getAllTeachers().find(
       (t) => t.username === username && t.password === password,
     );
 
