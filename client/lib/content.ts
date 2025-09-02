@@ -50,16 +50,28 @@ export const defaultContent: Record<ContentKey, string> = {
   "login.admin.subtitle": "System Administration Access",
 };
 
+let contentCache: Record<string, string> | null = null;
+
+function ensureCache() {
+  if (!contentCache) {
+    contentCache = safeLocalStorage.get<Record<string, string>>(CONTENT_KEY, {});
+  }
+  return contentCache;
+}
+
 function subscribe(callback: () => void) {
   const handler = (e: StorageEvent) => {
-    if (e.key === CONTENT_KEY) callback();
+    if (e.key === CONTENT_KEY) {
+      contentCache = safeLocalStorage.get<Record<string, string>>(CONTENT_KEY, {});
+      callback();
+    }
   };
   window.addEventListener("storage", handler);
   return () => window.removeEventListener("storage", handler);
 }
 
 function getSnapshot() {
-  return safeLocalStorage.get<Record<string, string>>(CONTENT_KEY, {});
+  return ensureCache();
 }
 
 export function useContent(key: ContentKey) {
@@ -68,12 +80,10 @@ export function useContent(key: ContentKey) {
 
   const setValue = useCallback(
     (next: string) => {
-      const current = safeLocalStorage.get<Record<string, string>>(
-        CONTENT_KEY,
-        {},
-      );
-      current[key] = next;
-      safeLocalStorage.set(CONTENT_KEY, current);
+      const current = ensureCache();
+      const nextStore = { ...current, [key]: next };
+      contentCache = nextStore;
+      safeLocalStorage.set(CONTENT_KEY, nextStore);
       // Trigger subscribers in same tab
       window.dispatchEvent(new StorageEvent("storage", { key: CONTENT_KEY }));
     },
@@ -84,11 +94,12 @@ export function useContent(key: ContentKey) {
 }
 
 export function getAllContent() {
-  const overrides = safeLocalStorage.get<Record<string, string>>(CONTENT_KEY, {});
+  const overrides = ensureCache();
   return { overrides, defaults: defaultContent };
 }
 
 export function resetAllContent() {
+  contentCache = {};
   safeLocalStorage.remove(CONTENT_KEY);
   window.dispatchEvent(new StorageEvent("storage", { key: CONTENT_KEY }));
 }
