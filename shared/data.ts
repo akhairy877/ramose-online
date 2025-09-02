@@ -594,6 +594,7 @@ export const deleteTeacher = (teacherId: string): boolean => {
   if (teacherIndex === -1) return false;
 
   globalVisionBoardData.teachers.splice(teacherIndex, 1);
+  if (typeof window !== "undefined") DataStorage.save(globalVisionBoardData);
   return true;
 };
 
