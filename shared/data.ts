@@ -556,6 +556,7 @@ export const addTeacher = (teacher: Omit<Teacher, "id">): boolean => {
   }
 
   globalVisionBoardData.teachers.push(newTeacher);
+  if (typeof window !== "undefined") DataStorage.save(globalVisionBoardData);
   return true;
 };
 
