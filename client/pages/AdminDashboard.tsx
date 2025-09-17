@@ -38,6 +38,7 @@ import {
   deleteTeacher,
   subjects,
   getCurrentVisionBoardData,
+  updateWeeksSettings,
 } from "@shared/data";
 import { Admin, Teacher, Subject } from "@shared/types";
 import { cn } from "@/lib/utils";
@@ -67,6 +68,8 @@ export default function AdminDashboard() {
   });
   const navigate = useNavigate();
   const [helpCta] = useContent("home.helpCta");
+  const [totalWeeksInput, setTotalWeeksInput] = useState<number>(() => getCurrentVisionBoardData().totalWeeks);
+  const [currentWeekInput, setCurrentWeekInput] = useState<number>(() => getCurrentVisionBoardData().currentWeek);
 
   useEffect(() => {
     const adminData = localStorage.getItem("currentAdmin");
@@ -321,6 +324,62 @@ export default function AdminDashboard() {
             </CardContent>
           </Card>
         </div>
+
+        {/* Academic Weeks Settings */}
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle className="text-orange-700">Academic Weeks Settings</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
+              <div>
+                <Label htmlFor="total-weeks">Total Weeks (per year)</Label>
+                <Input
+                  id="total-weeks"
+                  type="number"
+                  min={1}
+                  value={totalWeeksInput}
+                  onChange={(e) => {
+                    const val = Math.max(1, Math.floor(Number(e.target.value) || 0));
+                    setTotalWeeksInput(val);
+                    if (currentWeekInput > val) setCurrentWeekInput(val);
+                  }}
+                  placeholder="Enter total number of weeks"
+                />
+              </div>
+              <div>
+                <Label htmlFor="current-week">Current Week</Label>
+                <Input
+                  id="current-week"
+                  type="number"
+                  min={1}
+                  max={totalWeeksInput}
+                  value={currentWeekInput}
+                  onChange={(e) => {
+                    const val = Math.floor(Number(e.target.value) || 1);
+                    setCurrentWeekInput(Math.min(Math.max(1, val), totalWeeksInput));
+                  }}
+                  placeholder="Enter current week"
+                />
+              </div>
+              <div className="flex gap-2">
+                <Button
+                  className="bg-orange-600 hover:bg-orange-700 text-white"
+                  onClick={() => {
+                    const total = Math.max(1, Math.floor(totalWeeksInput || 0));
+                    const current = Math.min(Math.max(1, Math.floor(currentWeekInput || 1)), total);
+                    updateWeeksSettings(current, total);
+                    setTotalWeeksInput(total);
+                    setCurrentWeekInput(current);
+                    showFeedback(`Saved: total weeks ${total}, current week ${current}`);
+                  }}
+                >
+                  Save Settings
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Teacher Management */}
         <Card>
