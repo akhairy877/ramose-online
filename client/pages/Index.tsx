@@ -256,10 +256,14 @@ export default function Index() {
             <div className="w-24 sm:w-32 bg-gray-200 rounded-full h-2">
               <div
                 className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full"
-                style={{ width: `${(currentWeek / currentData.totalWeeks) * 100}%` }}
+                style={{
+                  width: `${(currentWeek / currentData.totalWeeks) * 100}%`,
+                }}
               />
             </div>
-            <span>{Math.round((currentWeek / currentData.totalWeeks) * 100)}%</span>
+            <span>
+              {Math.round((currentWeek / currentData.totalWeeks) * 100)}%
+            </span>
           </div>
         </div>
 

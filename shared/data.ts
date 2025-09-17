@@ -307,7 +307,10 @@ const studentNames = [
   "Nathan Sanchez",
 ];
 
-const generateStudents = (currentWeek: number, totalWeeks: number): Student[] => {
+const generateStudents = (
+  currentWeek: number,
+  totalWeeks: number,
+): Student[] => {
   const students: Student[] = [];
 
   for (let i = 1; i <= 50; i++) {
@@ -333,15 +336,14 @@ const DEFAULT_CURRENT_WEEK = 12;
 const DEFAULT_TOTAL_WEEKS = 36;
 
 const loadedData = typeof window !== "undefined" ? DataStorage.load() : null;
-let globalVisionBoardData: VisionBoardData =
-  loadedData ?? {
-    students: generateStudents(DEFAULT_CURRENT_WEEK, DEFAULT_TOTAL_WEEKS),
-    subjects,
-    teachers,
-    admins,
-    currentWeek: DEFAULT_CURRENT_WEEK,
-    totalWeeks: DEFAULT_TOTAL_WEEKS,
-  };
+let globalVisionBoardData: VisionBoardData = loadedData ?? {
+  students: generateStudents(DEFAULT_CURRENT_WEEK, DEFAULT_TOTAL_WEEKS),
+  subjects,
+  teachers,
+  admins,
+  currentWeek: DEFAULT_CURRENT_WEEK,
+  totalWeeks: DEFAULT_TOTAL_WEEKS,
+};
 if (!loadedData && typeof window !== "undefined") {
   DataStorage.save(globalVisionBoardData);
 }

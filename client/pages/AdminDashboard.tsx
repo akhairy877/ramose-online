@@ -68,8 +68,12 @@ export default function AdminDashboard() {
   });
   const navigate = useNavigate();
   const [helpCta] = useContent("home.helpCta");
-  const [totalWeeksInput, setTotalWeeksInput] = useState<number>(() => getCurrentVisionBoardData().totalWeeks);
-  const [currentWeekInput, setCurrentWeekInput] = useState<number>(() => getCurrentVisionBoardData().currentWeek);
+  const [totalWeeksInput, setTotalWeeksInput] = useState<number>(
+    () => getCurrentVisionBoardData().totalWeeks,
+  );
+  const [currentWeekInput, setCurrentWeekInput] = useState<number>(
+    () => getCurrentVisionBoardData().currentWeek,
+  );
 
   useEffect(() => {
     const adminData = localStorage.getItem("currentAdmin");
@@ -328,7 +332,9 @@ export default function AdminDashboard() {
         {/* Academic Weeks Settings */}
         <Card className="mb-6">
           <CardHeader>
-            <CardTitle className="text-orange-700">Academic Weeks Settings</CardTitle>
+            <CardTitle className="text-orange-700">
+              Academic Weeks Settings
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
@@ -340,7 +346,10 @@ export default function AdminDashboard() {
                   min={1}
                   value={totalWeeksInput}
                   onChange={(e) => {
-                    const val = Math.max(1, Math.floor(Number(e.target.value) || 0));
+                    const val = Math.max(
+                      1,
+                      Math.floor(Number(e.target.value) || 0),
+                    );
                     setTotalWeeksInput(val);
                     if (currentWeekInput > val) setCurrentWeekInput(val);
                   }}
@@ -357,7 +366,9 @@ export default function AdminDashboard() {
                   value={currentWeekInput}
                   onChange={(e) => {
                     const val = Math.floor(Number(e.target.value) || 1);
-                    setCurrentWeekInput(Math.min(Math.max(1, val), totalWeeksInput));
+                    setCurrentWeekInput(
+                      Math.min(Math.max(1, val), totalWeeksInput),
+                    );
                   }}
                   placeholder="Enter current week"
                 />
@@ -367,11 +378,16 @@ export default function AdminDashboard() {
                   className="bg-orange-600 hover:bg-orange-700 text-white"
                   onClick={() => {
                     const total = Math.max(1, Math.floor(totalWeeksInput || 0));
-                    const current = Math.min(Math.max(1, Math.floor(currentWeekInput || 1)), total);
+                    const current = Math.min(
+                      Math.max(1, Math.floor(currentWeekInput || 1)),
+                      total,
+                    );
                     updateWeeksSettings(current, total);
                     setTotalWeeksInput(total);
                     setCurrentWeekInput(current);
-                    showFeedback(`Saved: total weeks ${total}, current week ${current}`);
+                    showFeedback(
+                      `Saved: total weeks ${total}, current week ${current}`,
+                    );
                   }}
                 >
                   Save Settings
