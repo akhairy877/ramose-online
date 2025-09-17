@@ -652,7 +652,7 @@ export default function TeacherDashboard() {
               </div>
               <div className="text-center p-4 bg-purple-50 rounded-lg">
                 <div className="text-2xl font-bold text-purple-600">
-                  {teacherSubjects.length * 36}
+                  {teacherSubjects.length * totalWeeks}
                 </div>
                 <div className="text-sm text-purple-700">Total Lessons</div>
               </div>

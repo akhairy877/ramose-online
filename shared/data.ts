@@ -91,12 +91,15 @@ const avatarColors = [
   "bg-teal-200",
 ];
 
-const generateMilestones = (studentId: string): Milestone[] => {
+const generateMilestones = (
+  studentId: string,
+  currentWeek: number,
+  totalWeeks: number,
+): Milestone[] => {
   const milestones: Milestone[] = [];
-  const currentWeek = 12; // Current week from visionBoardData
 
   subjects.forEach((subject) => {
-    for (let week = 1; week <= 36; week++) {
+    for (let week = 1; week <= totalWeeks; week++) {
       const id = `${studentId}-${subject.id}-${week}`;
       let attempts: QuizAttempt[] = [];
       let status: Milestone["status"] = "not-started";
@@ -304,12 +307,15 @@ const studentNames = [
   "Nathan Sanchez",
 ];
 
-const generateStudents = (): Student[] => {
+const generateStudents = (
+  currentWeek: number,
+  totalWeeks: number,
+): Student[] => {
   const students: Student[] = [];
 
   for (let i = 1; i <= 50; i++) {
     const id = `student-${i}`;
-    const milestones = generateMilestones(id);
+    const milestones = generateMilestones(id, currentWeek, totalWeeks);
     const totalPoints = milestones.reduce((sum, m) => sum + m.points, 0);
 
     students.push({
@@ -326,14 +332,17 @@ const generateStudents = (): Student[] => {
 };
 
 // Create a global data store that can be updated
+const DEFAULT_CURRENT_WEEK = 12;
+const DEFAULT_TOTAL_WEEKS = 36;
+
 const loadedData = typeof window !== "undefined" ? DataStorage.load() : null;
 let globalVisionBoardData: VisionBoardData = loadedData ?? {
-  students: generateStudents(),
+  students: generateStudents(DEFAULT_CURRENT_WEEK, DEFAULT_TOTAL_WEEKS),
   subjects,
   teachers,
   admins,
-  currentWeek: 12,
-  totalWeeks: 36,
+  currentWeek: DEFAULT_CURRENT_WEEK,
+  totalWeeks: DEFAULT_TOTAL_WEEKS,
 };
 if (!loadedData && typeof window !== "undefined") {
   DataStorage.save(globalVisionBoardData);
@@ -625,4 +634,25 @@ export const getAdminByCredentials = (
 // Function to get current data (for React components to re-render)
 export const getCurrentVisionBoardData = (): VisionBoardData => {
   return { ...globalVisionBoardData };
+};
+
+export const updateWeeksSettings = (
+  newCurrentWeek: number,
+  newTotalWeeks: number,
+): boolean => {
+  const total = Math.max(1, Math.floor(newTotalWeeks || 0));
+  const current = Math.min(Math.max(1, Math.floor(newCurrentWeek || 1)), total);
+
+  globalVisionBoardData.totalWeeks = total;
+  globalVisionBoardData.currentWeek = current;
+
+  // Regenerate milestones for each student based on new settings
+  globalVisionBoardData.students = globalVisionBoardData.students.map((s) => {
+    const milestones = generateMilestones(s.id, current, total);
+    const totalPoints = milestones.reduce((sum, m) => sum + m.points, 0);
+    return { ...s, milestones, totalPoints };
+  });
+
+  if (typeof window !== "undefined") DataStorage.save(globalVisionBoardData);
+  return true;
 };

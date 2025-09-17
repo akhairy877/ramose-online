@@ -137,7 +137,7 @@ export default function Index() {
     );
   };
 
-  const weeks = Array.from({ length: 36 }, (_, i) => i + 1);
+  const weeks = Array.from({ length: currentData.totalWeeks }, (_, i) => i + 1);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-yellow-50">
@@ -256,10 +256,14 @@ export default function Index() {
             <div className="w-24 sm:w-32 bg-gray-200 rounded-full h-2">
               <div
                 className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full"
-                style={{ width: `${(currentWeek / 36) * 100}%` }}
+                style={{
+                  width: `${(currentWeek / currentData.totalWeeks) * 100}%`,
+                }}
               />
             </div>
-            <span>{Math.round((currentWeek / 36) * 100)}%</span>
+            <span>
+              {Math.round((currentWeek / currentData.totalWeeks) * 100)}%
+            </span>
           </div>
         </div>
 
@@ -268,7 +272,7 @@ export default function Index() {
           <div
             className="min-w-[4500px] grid gap-3"
             style={{
-              gridTemplateColumns: "160px repeat(36, minmax(120px, 1fr))",
+              gridTemplateColumns: `160px repeat(${currentData.totalWeeks}, minmax(120px, 1fr))`,
             }}
           >
             {" "}

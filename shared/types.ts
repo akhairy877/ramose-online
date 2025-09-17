@@ -60,5 +60,5 @@ export interface VisionBoardData {
   teachers: Teacher[];
   admins: Admin[];
   currentWeek: number;
-  totalWeeks: 36;
+  totalWeeks: number;
 }
